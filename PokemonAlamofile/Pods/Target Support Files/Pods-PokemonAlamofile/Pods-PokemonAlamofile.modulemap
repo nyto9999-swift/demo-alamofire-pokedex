@@ -1,0 +1,6 @@
+framework module Pods_PokemonAlamofile {
+  umbrella header "Pods-PokemonAlamofile-umbrella.h"
+
+  export *
+  module * { export * }
+}
