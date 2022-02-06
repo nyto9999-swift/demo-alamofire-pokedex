@@ -15,6 +15,9 @@
 		8DE3FEED27AFC73B00099815 /* GenerationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FEEC27AFC73B00099815 /* GenerationsViewController.swift */; };
 		8DE3FEF427AFCA9900099815 /* PokemonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FEF327AFCA9900099815 /* PokemonsViewController.swift */; };
 		8DE3FEF627AFCAA800099815 /* PokemonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FEF527AFCAA800099815 /* PokemonViewController.swift */; };
+		8DE3FEF827AFE2DE00099815 /* Displayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FEF727AFE2DE00099815 /* Displayable.swift */; };
+		8DE3FEFA27AFE5B200099815 /* Generations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FEF927AFE5B200099815 /* Generations.swift */; };
+		8DE3FEFC27AFE62F00099815 /* Generation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FEFB27AFE62F00099815 /* Generation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +32,9 @@
 		8DE3FEEC27AFC73B00099815 /* GenerationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationsViewController.swift; sourceTree = "<group>"; };
 		8DE3FEF327AFCA9900099815 /* PokemonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonsViewController.swift; sourceTree = "<group>"; };
 		8DE3FEF527AFCAA800099815 /* PokemonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonViewController.swift; sourceTree = "<group>"; };
+		8DE3FEF727AFE2DE00099815 /* Displayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Displayable.swift; sourceTree = "<group>"; };
+		8DE3FEF927AFE5B200099815 /* Generations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generations.swift; sourceTree = "<group>"; };
+		8DE3FEFB27AFE62F00099815 /* Generation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generation.swift; sourceTree = "<group>"; };
 		F948CE48D53155FAAF75C703 /* Pods-PokemonAlamofile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokemonAlamofile.debug.xcconfig"; path = "Target Support Files/Pods-PokemonAlamofile/Pods-PokemonAlamofile.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,7 +80,7 @@
 		8D89A9BE27AFB5EC0030D435 /* PokemonAlamofile */ = {
 			isa = PBXGroup;
 			children = (
-				8DE3FEF227AFCA1E00099815 /* View Controllers */,
+				8DE3FEF227AFCA1E00099815 /* View */,
 				8DE3FEF027AFCA1000099815 /* Networking */,
 				8D89A9BF27AFB5EC0030D435 /* AppDelegate.swift */,
 				8D89A9C127AFB5EC0030D435 /* SceneDelegate.swift */,
@@ -89,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				8DE3FEF127AFCA1800099815 /* Models */,
+				8DE3FEF727AFE2DE00099815 /* Displayable.swift */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -96,18 +103,20 @@
 		8DE3FEF127AFCA1800099815 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8DE3FEF927AFE5B200099815 /* Generations.swift */,
+				8DE3FEFB27AFE62F00099815 /* Generation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		8DE3FEF227AFCA1E00099815 /* View Controllers */ = {
+		8DE3FEF227AFCA1E00099815 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				8DE3FEEC27AFC73B00099815 /* GenerationsViewController.swift */,
 				8DE3FEF327AFCA9900099815 /* PokemonsViewController.swift */,
 				8DE3FEF527AFCAA800099815 /* PokemonViewController.swift */,
 			);
-			name = "View Controllers";
+			name = View;
 			sourceTree = "<group>";
 		};
 		FC5961898BFDA5D0286C5458 /* Frameworks */ = {
@@ -236,7 +245,10 @@
 				8DE3FEF627AFCAA800099815 /* PokemonViewController.swift in Sources */,
 				8D89A9C027AFB5EC0030D435 /* AppDelegate.swift in Sources */,
 				8DE3FEF427AFCA9900099815 /* PokemonsViewController.swift in Sources */,
+				8DE3FEF827AFE2DE00099815 /* Displayable.swift in Sources */,
 				8D89A9C227AFB5EC0030D435 /* SceneDelegate.swift in Sources */,
+				8DE3FEFA27AFE5B200099815 /* Generations.swift in Sources */,
+				8DE3FEFC27AFE62F00099815 /* Generation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
