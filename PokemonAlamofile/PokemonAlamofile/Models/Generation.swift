@@ -8,18 +8,18 @@
 import Foundation
 
 struct Generation: Decodable {
-  let title: String
+  let name: String
   let url: String
   
   enum CodingKeys: String, CodingKey {
-    case title = "name"
+    case name
     case url
   }
 }
 
 extension Generation: Displayable {
     var titleLabelText: String {
-        title
+        name
     }
     
     var subtitleLabelText: String {

@@ -65,9 +65,10 @@ extension GenerationsViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         chosenItem = items[indexPath.row]
         
-        let vc = PokemonsViewController()
+        let destinationVC = PokemonsViewController()
+        destinationVC.generation = chosenItem
         
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(destinationVC, animated: true)
     }
     
 

@@ -18,6 +18,8 @@
 		8DE3FEF827AFE2DE00099815 /* Displayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FEF727AFE2DE00099815 /* Displayable.swift */; };
 		8DE3FEFA27AFE5B200099815 /* Generations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FEF927AFE5B200099815 /* Generations.swift */; };
 		8DE3FEFC27AFE62F00099815 /* Generation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FEFB27AFE62F00099815 /* Generation.swift */; };
+		8DE3FEFE27B0B29200099815 /* Pokemons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FEFD27B0B29200099815 /* Pokemons.swift */; };
+		8DE3FF0027B0B32B00099815 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FEFF27B0B32B00099815 /* Pokemon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		8DE3FEF727AFE2DE00099815 /* Displayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Displayable.swift; sourceTree = "<group>"; };
 		8DE3FEF927AFE5B200099815 /* Generations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generations.swift; sourceTree = "<group>"; };
 		8DE3FEFB27AFE62F00099815 /* Generation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generation.swift; sourceTree = "<group>"; };
+		8DE3FEFD27B0B29200099815 /* Pokemons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemons.swift; sourceTree = "<group>"; };
+		8DE3FEFF27B0B32B00099815 /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		F948CE48D53155FAAF75C703 /* Pods-PokemonAlamofile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokemonAlamofile.debug.xcconfig"; path = "Target Support Files/Pods-PokemonAlamofile/Pods-PokemonAlamofile.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,6 +109,8 @@
 			children = (
 				8DE3FEF927AFE5B200099815 /* Generations.swift */,
 				8DE3FEFB27AFE62F00099815 /* Generation.swift */,
+				8DE3FEFD27B0B29200099815 /* Pokemons.swift */,
+				8DE3FEFF27B0B32B00099815 /* Pokemon.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -245,6 +251,8 @@
 				8DE3FEF627AFCAA800099815 /* PokemonViewController.swift in Sources */,
 				8D89A9C027AFB5EC0030D435 /* AppDelegate.swift in Sources */,
 				8DE3FEF427AFCA9900099815 /* PokemonsViewController.swift in Sources */,
+				8DE3FEFE27B0B29200099815 /* Pokemons.swift in Sources */,
+				8DE3FF0027B0B32B00099815 /* Pokemon.swift in Sources */,
 				8DE3FEF827AFE2DE00099815 /* Displayable.swift in Sources */,
 				8D89A9C227AFB5EC0030D435 /* SceneDelegate.swift in Sources */,
 				8DE3FEFA27AFE5B200099815 /* Generations.swift in Sources */,
