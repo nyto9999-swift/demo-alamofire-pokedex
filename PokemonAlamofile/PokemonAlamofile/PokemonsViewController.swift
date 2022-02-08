@@ -60,7 +60,11 @@ extension PokemonsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
+        
+        let destinationVC = PokemonViewController()
+        destinationVC.url = items[indexPath.row].subtitleLabelText
+        
+        self.navigationController?.pushViewController(destinationVC, animated: true)
     }
     
     
