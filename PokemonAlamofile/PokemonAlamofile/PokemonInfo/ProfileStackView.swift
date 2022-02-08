@@ -76,14 +76,12 @@ final class ProfileStackView: UIStackView {
         return view
     }()
     
-    
     private override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
         setupConstraints()
         configureProfile()
     }
-    
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -101,9 +99,8 @@ final class ProfileStackView: UIStackView {
             imageView.heightAnchor.constraint(equalToConstant: 100),
             imageView.widthAnchor.constraint(equalToConstant: 100)
         ])
-        
-        
     }
+    
 }
 
 extension ProfileStackView {
