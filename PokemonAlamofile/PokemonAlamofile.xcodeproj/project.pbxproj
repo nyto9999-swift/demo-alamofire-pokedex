@@ -24,6 +24,7 @@
 		8DE3FF1227B2189700099815 /* StateStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FF1127B2189700099815 /* StateStackView.swift */; };
 		8DE3FF1627B2191D00099815 /* AbilityStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FF1527B2191D00099815 /* AbilityStackView.swift */; };
 		8DE3FF1827B2192700099815 /* MoveStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FF1727B2192700099815 /* MoveStackView.swift */; };
+		8DE3FF1B27B22A5400099815 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FF1A27B22A5400099815 /* UIView+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		8DE3FF1127B2189700099815 /* StateStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateStackView.swift; sourceTree = "<group>"; };
 		8DE3FF1527B2191D00099815 /* AbilityStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityStackView.swift; sourceTree = "<group>"; };
 		8DE3FF1727B2192700099815 /* MoveStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveStackView.swift; sourceTree = "<group>"; };
+		8DE3FF1A27B22A5400099815 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		F948CE48D53155FAAF75C703 /* Pods-PokemonAlamofile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokemonAlamofile.debug.xcconfig"; path = "Target Support Files/Pods-PokemonAlamofile/Pods-PokemonAlamofile.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,6 +78,7 @@
 			children = (
 				8D89A9BE27AFB5EC0030D435 /* PokemonAlamofile */,
 				8D89A9BD27AFB5EC0030D435 /* Products */,
+				8DE3FF1927B22A2B00099815 /* Utilities */,
 				691C688C6857C5014E939417 /* Pods */,
 				FC5961898BFDA5D0286C5458 /* Frameworks */,
 			);
@@ -143,6 +146,14 @@
 				8DE3FF1727B2192700099815 /* MoveStackView.swift */,
 			);
 			path = PokemonInfo;
+			sourceTree = "<group>";
+		};
+		8DE3FF1927B22A2B00099815 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				8DE3FF1A27B22A5400099815 /* UIView+Extensions.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		FC5961898BFDA5D0286C5458 /* Frameworks */ = {
@@ -279,6 +290,7 @@
 				8DE3FEF827AFE2DE00099815 /* Displayable.swift in Sources */,
 				8D89A9C227AFB5EC0030D435 /* SceneDelegate.swift in Sources */,
 				8DE3FEFA27AFE5B200099815 /* Generations.swift in Sources */,
+				8DE3FF1B27B22A5400099815 /* UIView+Extensions.swift in Sources */,
 				8DE3FF1027B2188D00099815 /* ProfileStackView.swift in Sources */,
 				8DE3FEFC27AFE62F00099815 /* Generation.swift in Sources */,
 			);

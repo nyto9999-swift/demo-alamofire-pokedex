@@ -12,11 +12,10 @@ class PokemonViewController: UIViewController {
     var url: String = ""
     
     lazy var scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = .yellow
-        
-        return scrollView
+        let view = UIScrollView()
+        view.backgroundColor = .yellow
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     lazy var scrollViewContainer: UIStackView = {
@@ -27,28 +26,53 @@ class PokemonViewController: UIViewController {
         return view
     }()
     
-    lazy var profileStackView: UIStackView = {
-        let profileStackView = UIStackView()
-        profileStackView.axis = .vertical
-        profileStackView.spacing = 10
-        profileStackView.heightAnchor.constraint(equalToConstant: 500).isActive = true
-        profileStackView.backgroundColor = .blue
-        return profileStackView
+    lazy var profileStackView: ProfileStackView = {
+        let view = ProfileStackView()
+        view.axis = .horizontal
+        view.distribution = .fillProportionally
+        view.spacing = 10
+        return view
     }()
     
+    lazy var stateStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.spacing = 10
+        view.heightAnchor.constraint(equalToConstant: 500).isActive = true
+        view.backgroundColor = .red
+        return view
+    }()
+    
+    lazy var abilityStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.spacing = 10
+        view.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        view.backgroundColor = .darkGray
+        return view
+    }()
+    
+    lazy var moveStackView: UIStackView = {
+        let view = UIStackView()
+        
+        view.axis = .vertical
+        view.spacing = 10
+        view.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        view.backgroundColor = .cyan
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .green
         setupViews()
         setupConstraints()
-        
     }
     
     func setupViews(){
         view.addSubview(scrollView)
         scrollView.addSubview(scrollViewContainer)
-        scrollViewContainer.addArrangedSubview(profileStackView)
+        scrollViewContainer.addArrangedSubviews(profileStackView, stateStackView, abilityStackView, moveStackView)
     }
     
     func setupConstraints(){
