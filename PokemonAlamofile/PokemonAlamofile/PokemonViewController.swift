@@ -34,11 +34,11 @@ class PokemonViewController: UIViewController {
         return view
     }()
     
-    lazy var stateStackView: UIStackView = {
-        let view = UIStackView()
+    lazy var stateStackView: StateStackView = {
+        let view = StateStackView()
         view.axis = .vertical
         view.spacing = 10
-        view.heightAnchor.constraint(equalToConstant: 500).isActive = true
+        view.distribution = .fillProportionally
         view.backgroundColor = .red
         return view
     }()

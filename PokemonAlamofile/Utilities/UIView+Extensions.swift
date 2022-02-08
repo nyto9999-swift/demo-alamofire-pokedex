@@ -21,4 +21,41 @@ public extension UIStackView {
       addArrangedSubview(view)
     }
   }
+    
+    func stateRow() -> UIStackView  {
+        let view = UIStackView()
+        view.axis = .vertical
+        
+        view.sizeToFit()
+        view.distribution = .fill
+        view.layoutIfNeeded()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        NSLayoutConstraint.activate([
+            view.heightAnchor.constraint(equalToConstant: 50)
+        ])
+        return view
+    }
+    
+    func stateLabel() -> UILabel {
+        let view = UILabel()
+        view.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        return view
+    }
+    
+    func stateBar() -> UIProgressView {
+        let view = UIProgressView()
+         view.progressViewStyle = .bar
+         view.progressTintColor = .systemGreen
+         view.trackTintColor = .darkGray
+         view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            view.heightAnchor.constraint(equalToConstant: 15)
+        ])
+        return view
+    }
 }
+
+
