@@ -10,7 +10,6 @@ import UIKit
 
 
 final class ProfileStackView: UIStackView {
-    private let padding: CGFloat = 8
     
     private lazy var imageView: UIImageView = {
         let image = UIImageView()
