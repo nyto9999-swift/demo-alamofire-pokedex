@@ -53,7 +53,7 @@ extension PokemonsViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         var content = cell.defaultContentConfiguration()
         content.text = item.titleLabelText
-        content.secondaryText = item.subtitleLabelText
+        content.secondaryText = String(indexPath.row)
         cell.contentConfiguration = content
         return cell
     }

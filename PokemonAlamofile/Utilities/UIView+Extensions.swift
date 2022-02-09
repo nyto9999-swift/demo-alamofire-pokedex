@@ -31,16 +31,8 @@ public extension UIStackView {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         NSLayoutConstraint.activate([
-            view.heightAnchor.constraint(equalToConstant: 50)
+            view.heightAnchor.constraint(equalToConstant: 50),
         ])
-        return view
-    }
-    
-    func stateLabel() -> UILabel {
-        let view = UILabel()
-        view.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        view.textAlignment = .left
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }
     
@@ -52,17 +44,31 @@ public extension UIStackView {
         return view
     }
     
+    func imageView() -> UIImageView {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFit
+        image.clipsToBounds = true
+        image.backgroundColor = .white
+        image.layer.cornerRadius = 8
+        image.sizeToFit()
+        image.layoutIfNeeded()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }
+    
     func stateBar() -> UIProgressView {
         let view = UIProgressView()
          view.progressViewStyle = .bar
-         view.progressTintColor = .systemGreen
-         view.trackTintColor = .darkGray
+         
+        view.trackTintColor = .systemGray6
          view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             view.heightAnchor.constraint(equalToConstant: 15)
         ])
         return view
     }
+    
+
 }
 
 
