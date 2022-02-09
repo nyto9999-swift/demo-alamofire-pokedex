@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Alamofire
 
 class PokemonViewController: UIViewController {
     
-    var url: String = ""
-
+    var url: String?
+    var data: DisplayablePokemon?
+    
     lazy var scrollView: UIScrollView = {
         let view = UIScrollView()
         view.backgroundColor = .yellow
@@ -70,8 +72,12 @@ class PokemonViewController: UIViewController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fetchPokemonInfo(with: url!)
+        
         setupViews()
         setupConstraints()
+    
     }
     
  
@@ -84,8 +90,10 @@ class PokemonViewController: UIViewController {
         moveTableView.delegate = self
         moveTableView.dataSource = self
         moveTableView.register(UITableViewCell.self, forCellReuseIdentifier: "tcell")
- 
+        
         view.addSubview(scrollView)
+        
+        
         scrollView.addSubview(scrollViewContainer)
         scrollViewContainer.addArrangedSubviews(profileStackView, stateStackView, abilityCollectionView, moveTableView)
         
@@ -108,6 +116,24 @@ class PokemonViewController: UIViewController {
             // this is important for scrolling
             scrollViewContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
+    }
+    
+    func fetchPokemonInfo(with url: String?){
+        guard let url = url else { return }
+        
+        let pokeUrl = url.replacingOccurrences(of: "-species", with: "", options: NSString.CompareOptions.literal, range: nil)
+        print(pokeUrl)
+        AF.request(pokeUrl)
+          .validate()
+          .responseDecodable(of: PokemonDetails.self) { (response) in
+            guard let pokeDetails = response.value else { return }
+              self.data = pokeDetails
+              DispatchQueue.main.async {
+                  self.profileStackView.data = self.data
+                  self.profileStackView.configure()
+              }
+          }
+        
     }
 }
 

@@ -29,7 +29,6 @@ class PokemonsViewController: UIViewController {
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
-
 }
 
 extension PokemonsViewController {

@@ -8,7 +8,6 @@
 struct Pokemon: Decodable {
     let name: String
     let url: String
-    
     enum CodingKeys: String, CodingKey {
       case name
       case url
@@ -23,6 +22,5 @@ extension Pokemon: Displayable {
     var subtitleLabelText: String {
         url
     }
-    
-    
 }
+

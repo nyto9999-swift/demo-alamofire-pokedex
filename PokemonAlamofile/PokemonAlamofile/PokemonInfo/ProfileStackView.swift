@@ -4,12 +4,11 @@
 //
 //  Created by 宇宣 Chen on 2022/2/8.
 //
-
-import Foundation
 import UIKit
-
+import Kingfisher
 
 final class ProfileStackView: UIStackView {
+    var data: DisplayablePokemon?
     
     private lazy var imageView: UIImageView = {
         let image = UIImageView()
@@ -32,7 +31,7 @@ final class ProfileStackView: UIStackView {
         return view
     }()
     
-    private lazy var textLabel1: UILabel = {
+    lazy var textLabel1: UILabel = {
         let view = UILabel()
         view.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         view.textAlignment = .left
@@ -80,7 +79,11 @@ final class ProfileStackView: UIStackView {
         super.init(frame: frame)
         setupViews()
         setupConstraints()
-        configureProfile()
+    }
+    
+    public convenience init() {
+        self.init(frame: .zero)
+        configure()
     }
     
     required init(coder: NSCoder) {
@@ -104,11 +107,15 @@ final class ProfileStackView: UIStackView {
 }
 
 extension ProfileStackView {
-    public func configureProfile(){
-        textLabel1.text = "Name: bulbasaur"
-        textLabel2.text = "Heif"
-        typeLabel1.text = "Fire"
-        typeLabel2.text = "Posision"
-        imageView.image = UIImage(systemName: "circle")
+
+    
+    public func configure(){
+        
+        textLabel1.text = "Name: \(data?.nameLabelText ?? "")"
+        textLabel2.text = "Height: \(data?.hwLabelText.height ?? 0) Weight: \(data?.hwLabelText.weight ?? 0)"
+        typeLabel1.text = "Type: \(data?.typeLabelText.type1 ?? "")"
+        typeLabel2.text = "Type: \(data?.typeLabelText.type2 ?? "")"
+        imageView.kf.setImage(with: URL(string: data?.imageViewUrl ?? ""))
+        
     }
 }
