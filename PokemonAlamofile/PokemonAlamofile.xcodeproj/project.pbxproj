@@ -12,6 +12,8 @@
 		8D89A9C227AFB5EC0030D435 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D89A9C127AFB5EC0030D435 /* SceneDelegate.swift */; };
 		8D89A9C927AFB5ED0030D435 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D89A9C827AFB5ED0030D435 /* Assets.xcassets */; };
 		8D89A9CC27AFB5ED0030D435 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D89A9CA27AFB5ED0030D435 /* LaunchScreen.storyboard */; };
+		8D8D495027B3641600F1C5C1 /* PokemonDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D494F27B3641600F1C5C1 /* PokemonDetails.swift */; };
+		8D8D495227B3644A00F1C5C1 /* DisplayablePokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D495127B3644A00F1C5C1 /* DisplayablePokemon.swift */; };
 		8DE3FEED27AFC73B00099815 /* GenerationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FEEC27AFC73B00099815 /* GenerationsViewController.swift */; };
 		8DE3FEF427AFCA9900099815 /* PokemonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FEF327AFCA9900099815 /* PokemonsViewController.swift */; };
 		8DE3FEF627AFCAA800099815 /* PokemonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FEF527AFCAA800099815 /* PokemonViewController.swift */; };
@@ -36,6 +38,8 @@
 		8D89A9C827AFB5ED0030D435 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D89A9CB27AFB5ED0030D435 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D89A9CD27AFB5ED0030D435 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D8D494F27B3641600F1C5C1 /* PokemonDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetails.swift; sourceTree = "<group>"; };
+		8D8D495127B3644A00F1C5C1 /* DisplayablePokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayablePokemon.swift; sourceTree = "<group>"; };
 		8DE3FEEC27AFC73B00099815 /* GenerationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationsViewController.swift; sourceTree = "<group>"; };
 		8DE3FEF327AFCA9900099815 /* PokemonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonsViewController.swift; sourceTree = "<group>"; };
 		8DE3FEF527AFCAA800099815 /* PokemonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 			children = (
 				8DE3FEF127AFCA1800099815 /* Models */,
 				8DE3FEF727AFE2DE00099815 /* Displayable.swift */,
+				8D8D495127B3644A00F1C5C1 /* DisplayablePokemon.swift */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -122,6 +127,7 @@
 				8DE3FEFB27AFE62F00099815 /* Generation.swift */,
 				8DE3FEFD27B0B29200099815 /* Pokemons.swift */,
 				8DE3FEFF27B0B32B00099815 /* Pokemon.swift */,
+				8D8D494F27B3641600F1C5C1 /* PokemonDetails.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -282,12 +288,14 @@
 				8DE3FF1627B2191D00099815 /* AbilityCollectionView.swift in Sources */,
 				8DE3FEF627AFCAA800099815 /* PokemonViewController.swift in Sources */,
 				8D89A9C027AFB5EC0030D435 /* AppDelegate.swift in Sources */,
+				8D8D495227B3644A00F1C5C1 /* DisplayablePokemon.swift in Sources */,
 				8DE3FEF427AFCA9900099815 /* PokemonsViewController.swift in Sources */,
 				8DE3FEFE27B0B29200099815 /* Pokemons.swift in Sources */,
 				8DE3FF1227B2189700099815 /* StateStackView.swift in Sources */,
 				8DE3FF0027B0B32B00099815 /* Pokemon.swift in Sources */,
 				8DE3FF1827B2192700099815 /* MoveStackView.swift in Sources */,
 				8DE3FEF827AFE2DE00099815 /* Displayable.swift in Sources */,
+				8D8D495027B3641600F1C5C1 /* PokemonDetails.swift in Sources */,
 				8D89A9C227AFB5EC0030D435 /* SceneDelegate.swift in Sources */,
 				8DE3FEFA27AFE5B200099815 /* Generations.swift in Sources */,
 				8DE3FF1B27B22A5400099815 /* UIView+Extensions.swift in Sources */,

@@ -25,7 +25,6 @@ public extension UIStackView {
     func stateRow() -> UIStackView  {
         let view = UIStackView()
         view.axis = .vertical
-        
         view.sizeToFit()
         view.distribution = .fill
         view.layoutIfNeeded()
@@ -40,8 +39,16 @@ public extension UIStackView {
     func stateLabel() -> UILabel {
         let view = UILabel()
         view.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        view.textAlignment = .left
         view.translatesAutoresizingMaskIntoConstraints = false
-
+        return view
+    }
+    
+    func textLabel() -> UILabel {
+        let view = UILabel()
+        view.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        view.textAlignment = .left
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }
     
