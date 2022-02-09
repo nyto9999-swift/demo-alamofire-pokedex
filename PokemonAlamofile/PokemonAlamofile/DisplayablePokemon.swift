@@ -10,5 +10,6 @@ protocol DisplayablePokemon {
     var nameLabelText: String { get }
     var hwLabelText: (height: Int, weight: Int) { get }
     var typeLabelText: (type1: String, type2: String) { get }
+    var statsArray: Array<stat> { get }
 }
 

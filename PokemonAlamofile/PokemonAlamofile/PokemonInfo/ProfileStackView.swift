@@ -10,18 +10,13 @@ import Kingfisher
 final class ProfileStackView: UIStackView {
     var data: DisplayablePokemon?
     
-    private lazy var imageView: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFit
-        image.clipsToBounds = true
-        image.backgroundColor = .white
-        image.layer.cornerRadius = 8
-        image.sizeToFit()
-        image.layoutIfNeeded()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
-    
+    private lazy var textLabel1: UILabel = textLabel()
+    private lazy var textLabel2: UILabel = textLabel()
+    private lazy var typeLabel1: UILabel = textLabel()
+    private lazy var typeLabel2: UILabel = textLabel()
+    private lazy var imageView: UIImageView = imageView()
+
+   
     private lazy var textStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
@@ -31,46 +26,10 @@ final class ProfileStackView: UIStackView {
         return view
     }()
     
-    lazy var textLabel1: UILabel = {
-        let view = UILabel()
-        view.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        view.textAlignment = .left
-        view.backgroundColor = .darkGray
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private lazy var textLabel2: UILabel = {
-        let view = UILabel()
-        view.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        view.textAlignment = .left
-        view.backgroundColor = .darkGray
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     private lazy var typeStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
         view.distribution = .fillEqually
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private lazy var typeLabel1: UILabel = {
-        let view = UILabel()
-        view.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        view.textAlignment = .left
-        view.backgroundColor = .darkGray
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private lazy var typeLabel2: UILabel = {
-        let view = UILabel()
-        view.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        view.textAlignment = .left
-        view.backgroundColor = .darkGray
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -94,28 +53,41 @@ final class ProfileStackView: UIStackView {
         self.addArrangedSubviews(imageView, textStackView)
         textStackView.addArrangedSubviews(textLabel1, textLabel2, typeStackView)
         typeStackView.addArrangedSubviews(typeLabel1,typeLabel2)
-        
     }
     
     private func setupConstraints(){
+        
+        self.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
+        self.isLayoutMarginsRelativeArrangement = true
+        
         NSLayoutConstraint.activate([
             imageView.heightAnchor.constraint(equalToConstant: 100),
             imageView.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
-    
 }
 
 extension ProfileStackView {
-
     
     public func configure(){
         
         textLabel1.text = "Name: \(data?.nameLabelText ?? "")"
         textLabel2.text = "Height: \(data?.hwLabelText.height ?? 0) Weight: \(data?.hwLabelText.weight ?? 0)"
+        
         typeLabel1.text = "Type: \(data?.typeLabelText.type1 ?? "")"
-        typeLabel2.text = "Type: \(data?.typeLabelText.type2 ?? "")"
-        imageView.kf.setImage(with: URL(string: data?.imageViewUrl ?? ""))
+        
+        if data?.typeLabelText.type2 == "" {
+            typeLabel2.text = ""
+        }
+        else {
+            typeLabel2.text = "Type: \(data?.typeLabelText.type2 ?? "")"
+        }
+        
+        let processor = DownsamplingImageProcessor(size: imageView.bounds.size)
+        imageView.kf.setImage(with: URL(string: data?.imageViewUrl ?? ""),
+        options: [
+            .processor(processor)
+        ])
         
     }
 }

@@ -41,7 +41,6 @@ class PokemonViewController: UIViewController {
         view.axis = .vertical
         view.spacing = 10
         view.distribution = .fillProportionally
-        view.backgroundColor = .red
         return view
     }()
     
@@ -128,9 +127,12 @@ class PokemonViewController: UIViewController {
           .responseDecodable(of: PokemonDetails.self) { (response) in
             guard let pokeDetails = response.value else { return }
               self.data = pokeDetails
+              print(self.data?.statsArray[0].s)
               DispatchQueue.main.async {
                   self.profileStackView.data = self.data
                   self.profileStackView.configure()
+                  self.stateStackView.data = self.data
+                  self.stateStackView.configure()
               }
           }
         
