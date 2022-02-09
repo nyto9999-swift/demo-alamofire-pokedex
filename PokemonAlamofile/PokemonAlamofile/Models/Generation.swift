@@ -25,6 +25,4 @@ extension Generation: Displayable {
     var subtitleLabelText: String {
         url
     }
-    
-    
 }

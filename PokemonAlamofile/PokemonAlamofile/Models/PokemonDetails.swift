@@ -35,7 +35,6 @@ extension PokemonDetails: DisplayablePokemon {
         image.url
     }
     
-    
     var typeLabelText: (type1: String, type2: String) {
         
         if types.count != 2 {
@@ -51,12 +50,15 @@ extension PokemonDetails: DisplayablePokemon {
     var hwLabelText: (height: Int, weight: Int) {
         (height, weight)
     }
+    
 }
+
+
 struct stat: Decodable {
-    let s: Int
+    let value: Int
     
     enum CodingKeys: String, CodingKey {
-        case s = "base_stat"
+        case value = "base_stat"
     }
 }
 
@@ -70,7 +72,7 @@ struct image: Decodable {
 
 struct type: Decodable {
     let slot : Int
-    let type: t
+    let type: value
     
     enum CodingKeys: String, CodingKey {
         case slot
@@ -78,7 +80,7 @@ struct type: Decodable {
     }
 }
 
-struct t: Decodable {
+struct value : Decodable {
     let name : String
     
     enum CodingKeys: String, CodingKey {

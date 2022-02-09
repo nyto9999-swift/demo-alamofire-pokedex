@@ -23,7 +23,7 @@
 		8DE3FEFE27B0B29200099815 /* Pokemons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FEFD27B0B29200099815 /* Pokemons.swift */; };
 		8DE3FF0027B0B32B00099815 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FEFF27B0B32B00099815 /* Pokemon.swift */; };
 		8DE3FF1027B2188D00099815 /* ProfileStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FF0F27B2188D00099815 /* ProfileStackView.swift */; };
-		8DE3FF1227B2189700099815 /* StateStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FF1127B2189700099815 /* StateStackView.swift */; };
+		8DE3FF1227B2189700099815 /* StatStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FF1127B2189700099815 /* StatStackView.swift */; };
 		8DE3FF1627B2191D00099815 /* AbilityCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FF1527B2191D00099815 /* AbilityCollectionView.swift */; };
 		8DE3FF1827B2192700099815 /* MoveStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FF1727B2192700099815 /* MoveStackView.swift */; };
 		8DE3FF1B27B22A5400099815 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE3FF1A27B22A5400099815 /* UIView+Extensions.swift */; };
@@ -49,7 +49,7 @@
 		8DE3FEFD27B0B29200099815 /* Pokemons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemons.swift; sourceTree = "<group>"; };
 		8DE3FEFF27B0B32B00099815 /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		8DE3FF0F27B2188D00099815 /* ProfileStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStackView.swift; sourceTree = "<group>"; };
-		8DE3FF1127B2189700099815 /* StateStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateStackView.swift; sourceTree = "<group>"; };
+		8DE3FF1127B2189700099815 /* StatStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatStackView.swift; sourceTree = "<group>"; };
 		8DE3FF1527B2191D00099815 /* AbilityCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityCollectionView.swift; sourceTree = "<group>"; };
 		8DE3FF1727B2192700099815 /* MoveStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveStackView.swift; sourceTree = "<group>"; };
 		8DE3FF1A27B22A5400099815 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				8DE3FF0F27B2188D00099815 /* ProfileStackView.swift */,
-				8DE3FF1127B2189700099815 /* StateStackView.swift */,
+				8DE3FF1127B2189700099815 /* StatStackView.swift */,
 				8DE3FF1527B2191D00099815 /* AbilityCollectionView.swift */,
 				8DE3FF1727B2192700099815 /* MoveStackView.swift */,
 			);
@@ -291,7 +291,7 @@
 				8D8D495227B3644A00F1C5C1 /* DisplayablePokemon.swift in Sources */,
 				8DE3FEF427AFCA9900099815 /* PokemonsViewController.swift in Sources */,
 				8DE3FEFE27B0B29200099815 /* Pokemons.swift in Sources */,
-				8DE3FF1227B2189700099815 /* StateStackView.swift in Sources */,
+				8DE3FF1227B2189700099815 /* StatStackView.swift in Sources */,
 				8DE3FF0027B0B32B00099815 /* Pokemon.swift in Sources */,
 				8DE3FF1827B2192700099815 /* MoveStackView.swift in Sources */,
 				8DE3FEF827AFE2DE00099815 /* Displayable.swift in Sources */,

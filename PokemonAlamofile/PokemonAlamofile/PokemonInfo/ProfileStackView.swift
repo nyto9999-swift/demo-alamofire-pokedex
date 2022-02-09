@@ -16,7 +16,6 @@ final class ProfileStackView: UIStackView {
     private lazy var typeLabel2: UILabel = textLabel()
     private lazy var imageView: UIImageView = imageView()
 
-   
     private lazy var textStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
@@ -85,9 +84,8 @@ extension ProfileStackView {
         
         let processor = DownsamplingImageProcessor(size: imageView.bounds.size)
         imageView.kf.setImage(with: URL(string: data?.imageViewUrl ?? ""),
-        options: [
-            .processor(processor)
-        ])
-        
+                              options: [
+                                .processor(processor)
+                              ])
     }
 }

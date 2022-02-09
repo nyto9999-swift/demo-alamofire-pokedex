@@ -7,30 +7,30 @@
 
 import UIKit
 
-final class StateStackView: UIStackView {
+final class StatStackView: UIStackView {
     var data: DisplayablePokemon?
     
-    private lazy var stateRowStackView1: UIStackView = stateRow()
+    private lazy var statRowStackView1: UIStackView = statRow()
     private lazy var textLabel1: UILabel = textLabel()
     private lazy var barView1: UIProgressView = stateBar()
     
-    private lazy var stateRowStackView2: UIStackView = stateRow()
+    private lazy var statRowStackView2: UIStackView = statRow()
     private lazy var textLabel2: UILabel = textLabel()
     private lazy var barView2: UIProgressView = stateBar()
     
-    private lazy var stateRowStackView3: UIStackView = stateRow()
+    private lazy var statRowStackView3: UIStackView = statRow()
     private lazy var textLabel3: UILabel = textLabel()
     private lazy var barView3: UIProgressView = stateBar()
     
-    private lazy var stateRowStackView4: UIStackView = stateRow()
+    private lazy var statRowStackView4: UIStackView = statRow()
     private lazy var textLabel4: UILabel = textLabel()
     private lazy var barView4: UIProgressView = stateBar()
     
-    private lazy var stateRowStackView5: UIStackView = stateRow()
+    private lazy var statRowStackView5: UIStackView = statRow()
     private lazy var textLabel5: UILabel = textLabel()
     private lazy var barView5: UIProgressView = stateBar()
     
-    private lazy var stateRowStackView6: UIStackView = stateRow()
+    private lazy var statRowStackView6: UIStackView = statRow()
     private lazy var textLabel6: UILabel = textLabel()
     private lazy var barView6: UIProgressView = stateBar()
 
@@ -51,13 +51,13 @@ final class StateStackView: UIStackView {
     }
     
     private func setupViews(){
-        self.addArrangedSubviews(stateRowStackView1, stateRowStackView2, stateRowStackView3, stateRowStackView4, stateRowStackView5, stateRowStackView6)
-        stateRowStackView1.addArrangedSubviews(textLabel1, barView1)
-        stateRowStackView2.addArrangedSubviews(textLabel2, barView2)
-        stateRowStackView3.addArrangedSubviews(textLabel3, barView3)
-        stateRowStackView4.addArrangedSubviews(textLabel4, barView4)
-        stateRowStackView5.addArrangedSubviews(textLabel5, barView5)
-        stateRowStackView6.addArrangedSubviews(textLabel6, barView6)
+        self.addArrangedSubviews(statRowStackView1, statRowStackView2, statRowStackView3, statRowStackView4, statRowStackView5, statRowStackView6)
+        statRowStackView1.addArrangedSubviews(textLabel1, barView1)
+        statRowStackView2.addArrangedSubviews(textLabel2, barView2)
+        statRowStackView3.addArrangedSubviews(textLabel3, barView3)
+        statRowStackView4.addArrangedSubviews(textLabel4, barView4)
+        statRowStackView5.addArrangedSubviews(textLabel5, barView5)
+        statRowStackView6.addArrangedSubviews(textLabel6, barView6)
     }
     
     private func setupConstraints(){
@@ -66,35 +66,35 @@ final class StateStackView: UIStackView {
     }
 }
 
-extension StateStackView {
+extension StatStackView {
     public func configure(){
         
         guard let data = data else {
             return
         }
         
-        textLabel1.text = "HP"
-        barView1.progress =  Float(1.0 - (500.0 - Double(data.statsArray[0].s)) / 500.0)
+        textLabel1.text = "HP: \(data.statsArray[0].value)"
+        barView1.progress =  Float(1.0 - (160.0 - Double(data.statsArray[0].value)) / 160.0)
         barView1.progressTintColor = .systemMint
         
-        textLabel2.text = "Attack"
-        barView2.progress = Float(1.0 - (500.0 - Double(data.statsArray[1].s)) / 500.0)
+        textLabel2.text = "Attack: \(data.statsArray[1].value)"
+        barView2.progress = Float(1.0 - (150.0 - Double(data.statsArray[1].value)) / 150.0)
         barView2.progressTintColor = .systemOrange
         
-        textLabel3.text = "Defense"
-        barView3.progress = Float(1.0 - (500.0 - Double(data.statsArray[2].s)) / 500.0)
+        textLabel3.text = "Defense: \(data.statsArray[2].value)"
+        barView3.progress = Float(1.0 - (150.0 - Double(data.statsArray[2].value)) / 150.0)
         barView3.progressTintColor = .systemYellow
         
-        textLabel4.text = "Special Attack"
-        barView4.progress = Float(1.0 - (500.0 - Double(data.statsArray[3].s)) / 500.0)
+        textLabel4.text = "Special Attack: \(data.statsArray[3].value)"
+        barView4.progress = Float(1.0 - (150.0 - Double(data.statsArray[3].value)) / 150.0)
         barView4.progressTintColor = .systemCyan
         
-        textLabel5.text = "Special Defense"
-        barView5.progress = Float(1.0 - (500.0 - Double(data.statsArray[4].s)) / 500.0)
+        textLabel5.text = "Special Defense: \(data.statsArray[4].value)"
+        barView5.progress = Float(1.0 - (150.0 - Double(data.statsArray[4].value)) / 150.0)
         barView5.progressTintColor = .systemGreen
         
-        textLabel6.text = "Speed"
-        barView6.progress = Float(1.0 - (500.0 - Double(data.statsArray[5].s)) / 500.0)
+        textLabel6.text = "Speed: \(data.statsArray[5].value)"
+        barView6.progress = Float(1.0 - (150.0 - Double(data.statsArray[5].value)) / 150.0)
         barView6.progressTintColor = .systemPink
         
 //        print("data\( Float(1.0 - (500.0 - Double(data.statsArray[0].s)) / 500.0))")
