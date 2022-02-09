@@ -8,21 +8,14 @@
 import UIKit
 
 public extension UIView {
-  func addSubviews(_ views: UIView...) {
-    for view in views {
-      addSubview(view)
-    }
-  }
-}
-
-public extension UIStackView {
-  func addArrangedSubviews(_ views: UIView...) {
-    for view in views {
-      addArrangedSubview(view)
-    }
-  }
     
-    func stateRow() -> UIStackView  {
+    func addSubviews(_ views: UIView...) {
+        for view in views {
+            addSubview(view)
+        }
+    }
+    
+    func statRow() -> UIStackView  {
         let view = UIStackView()
         view.axis = .vertical
         view.sizeToFit()
@@ -58,17 +51,25 @@ public extension UIStackView {
     
     func stateBar() -> UIProgressView {
         let view = UIProgressView()
-         view.progressViewStyle = .bar
-         
+        view.progressViewStyle = .bar
         view.trackTintColor = .systemGray6
-         view.translatesAutoresizingMaskIntoConstraints = false
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 12
+        view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            view.heightAnchor.constraint(equalToConstant: 15)
+            view.heightAnchor.constraint(equalToConstant: 24)
         ])
         return view
     }
-    
+}
 
+public extension UIStackView {
+    
+    func addArrangedSubviews(_ views: UIView...) {
+        for view in views {
+            addArrangedSubview(view)
+        }
+    }
 }
 
 

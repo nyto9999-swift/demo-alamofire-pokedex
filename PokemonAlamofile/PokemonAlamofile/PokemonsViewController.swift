@@ -10,9 +10,8 @@ import Alamofire
 
 class PokemonsViewController: UIViewController {
     
+    var generation: Displayable? //passing data
     var items: [Displayable] = []
-    var generation: Displayable?
-    
     let tableView = UITableView()
     
     override func viewDidLoad() {
@@ -35,7 +34,6 @@ extension PokemonsViewController {
     func fetchPokemons(for url: String) {
       AF.request(url).validate().responseDecodable(of: Pokemons.self) { (response) in
         guard let pokemons = response.value else { return }
-        
         self.items = pokemons.all
         self.tableView.reloadData()
       }
@@ -62,10 +60,6 @@ extension PokemonsViewController: UITableViewDelegate, UITableViewDataSource {
         
         let destinationVC = PokemonViewController()
         destinationVC.url = items[indexPath.row].subtitleLabelText
-        
         self.navigationController?.pushViewController(destinationVC, animated: true)
     }
-    
-    
-    
 }

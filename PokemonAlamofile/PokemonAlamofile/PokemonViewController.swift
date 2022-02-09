@@ -10,12 +10,11 @@ import Alamofire
 
 class PokemonViewController: UIViewController {
     
-    var url: String?
+    var url: String? //passing data
     var data: DisplayablePokemon?
     
     lazy var scrollView: UIScrollView = {
         let view = UIScrollView()
-        view.backgroundColor = .yellow
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -33,14 +32,16 @@ class PokemonViewController: UIViewController {
         view.axis = .horizontal
         view.distribution = .fillProportionally
         view.spacing = 10
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    lazy var stateStackView: StateStackView = {
-        let view = StateStackView()
+    lazy var statStackView: StatStackView = {
+        let view = StatStackView()
         view.axis = .vertical
-        view.spacing = 10
         view.distribution = .fillProportionally
+        view.spacing = 10
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -51,35 +52,29 @@ class PokemonViewController: UIViewController {
         layout.itemSize = CGSize(width: 45, height: 45)
         let view = AbilityCollectionView(frame: self.view.frame, collectionViewLayout: layout)
         view.backgroundColor = .red
+        view.isScrollEnabled = true
         view.layoutIfNeeded()
         view.sizeToFit()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        view.isScrollEnabled = true
-        
         return view
     }()
     
     lazy var moveTableView: UITableView = {
         let view = UITableView()
         view.backgroundColor = .darkGray
-        
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
- 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = .white
         fetchPokemonInfo(with: url!)
-        
         setupViews()
         setupConstraints()
-    
     }
     
- 
     func setupViews(){
         
         abilityCollectionView.delegate = self
@@ -92,10 +87,8 @@ class PokemonViewController: UIViewController {
         
         view.addSubview(scrollView)
         
-        
         scrollView.addSubview(scrollViewContainer)
-        scrollViewContainer.addArrangedSubviews(profileStackView, stateStackView, abilityCollectionView, moveTableView)
-        
+        scrollViewContainer.addArrangedSubviews(profileStackView, statStackView, abilityCollectionView, moveTableView)
     }
     
     func setupConstraints(){
@@ -124,15 +117,18 @@ class PokemonViewController: UIViewController {
         print(pokeUrl)
         AF.request(pokeUrl)
           .validate()
-          .responseDecodable(of: PokemonDetails.self) { (response) in
-            guard let pokeDetails = response.value else { return }
+          .responseDecodable(of: PokemonDetails.self) { [weak self] (response) in
+              guard let pokeDetails = response.value else { return }
+            
+              guard let self = self else { return }
+
               self.data = pokeDetails
-              print(self.data?.statsArray[0].s)
+              
               DispatchQueue.main.async {
                   self.profileStackView.data = self.data
                   self.profileStackView.configure()
-                  self.stateStackView.data = self.data
-                  self.stateStackView.configure()
+                  self.statStackView.data = self.data
+                  self.statStackView.configure()
               }
           }
         
@@ -170,6 +166,5 @@ extension PokemonViewController: UITableViewDelegate, UITableViewDataSource {
         cell.contentConfiguration = content
         return cell
     }
-
 }
 

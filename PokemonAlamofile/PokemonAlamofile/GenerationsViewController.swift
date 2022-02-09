@@ -21,7 +21,6 @@ class GenerationsViewController: UIViewController {
       fetchGenerations()
     }
     
-    
     func setTableView(){
         tableView.frame = view.bounds
         tableView.dataSource = self
@@ -29,9 +28,6 @@ class GenerationsViewController: UIViewController {
         self.view.addSubview(tableView)
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
-    
-
-    
 }
 
 extension GenerationsViewController {
@@ -67,11 +63,8 @@ extension GenerationsViewController: UITableViewDelegate, UITableViewDataSource 
         
         let destinationVC = PokemonsViewController()
         destinationVC.generation = chosenItem
-        
         self.navigationController?.pushViewController(destinationVC, animated: true)
     }
-    
-
 }
 
 
