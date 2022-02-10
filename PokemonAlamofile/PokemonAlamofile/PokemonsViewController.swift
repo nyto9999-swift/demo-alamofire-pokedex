@@ -12,15 +12,28 @@ class PokemonsViewController: UIViewController {
     
     var generation: Displayable? //passing data
     var items: [Displayable] = []
+    var filterItems: [Displayable] = []
+    var isSearch: Bool = false
     let tableView = UITableView()
+    
+    lazy var searchBar:UISearchBar = {
+       let view = UISearchBar()
+        view.searchBarStyle = UISearchBar.Style.default
+        view.isUserInteractionEnabled = true
+        view.showsCancelButton = true
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTableView()
+        setViews()
         fetchPokemons(for: generation!.subtitleLabelText) //url
     }
     
-    func setTableView(){
+    func setViews(){
+        self.navigationItem.titleView = searchBar
+        searchBar.delegate = self
+        
         tableView.frame = view.bounds
         tableView.dataSource = self
         tableView.delegate = self
@@ -30,6 +43,7 @@ class PokemonsViewController: UIViewController {
     
 }
 
+// MARK: AF call
 extension PokemonsViewController {
     func fetchPokemons(for url: String) {
       AF.request(url).validate().responseDecodable(of: Pokemons.self) { (response) in
@@ -40,14 +54,16 @@ extension PokemonsViewController {
     }
 }
 
+// MARK: tableview cell
 extension PokemonsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        isSearch ? filterItems.count : items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = items[indexPath.row]
+        
+        let item = isSearch ? filterItems[indexPath.row] : items[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         var content = cell.defaultContentConfiguration()
         content.text = item.titleLabelText
@@ -62,4 +78,36 @@ extension PokemonsViewController: UITableViewDelegate, UITableViewDataSource {
         destinationVC.url = items[indexPath.row].subtitleLabelText
         self.navigationController?.pushViewController(destinationVC, animated: true)
     }
+}
+
+//MARK: search bar
+extension PokemonsViewController: UISearchBarDelegate {
+    
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text == "" || searchBar.text == nil {
+            isSearch = false
+            self.tableView.reloadData()
+        }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text else { return }
+        searchBar.resignFirstResponder()
+        
+        filterItems = items.filter({
+            $0.titleLabelText.contains(text)
+        })
+
+        isSearch = true
+        self.tableView.reloadData()
+    }
+    
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        self.tableView.reloadData()
+        isSearch = false
+    }
+
 }

@@ -10,5 +10,15 @@ struct Pokemons: Decodable {
     
     enum CodingKeys: String, CodingKey {
       case all = "pokemon_species"
+     
+    }
+}
+
+struct Search: Decodable {
+    let id: Int
+    let name: String
+    enum CodingKeys: String, CodingKey {
+      case name
+      case id
     }
 }
