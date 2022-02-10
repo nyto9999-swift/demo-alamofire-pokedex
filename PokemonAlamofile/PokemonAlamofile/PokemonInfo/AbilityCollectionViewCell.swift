@@ -15,7 +15,8 @@ class AbilityCollectionViewCell: UICollectionViewCell {
     private let button: UIButton = {
        let view = UIButton()
         view.setTitle("Ability", for: .normal)
-        view.backgroundColor = .green
+        view.backgroundColor = .systemGray2
+        view.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         view.isUserInteractionEnabled = false
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -23,10 +24,9 @@ class AbilityCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .systemPink
+        contentView.backgroundColor = .systemGray6
         setupViews()
         setupConstraints()
-        
     }
     
     public convenience init(){
@@ -56,6 +56,7 @@ class AbilityCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         button.setTitle(nil, for: .normal)
+        
     }
 
 }

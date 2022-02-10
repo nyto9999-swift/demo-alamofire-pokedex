@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7BE9FFF1CEBEC4175F872F18 /* Pods_PokemonAlamofile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D61D2227EDAD2B7B9C22531 /* Pods_PokemonAlamofile.framework */; };
+		8D6DB0D827B4E9470077E9EB /* MoveTableview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6DB0D727B4E9470077E9EB /* MoveTableview.swift */; };
+		8D6DB0DA27B4EE360077E9EB /* ColorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6DB0D927B4EE360077E9EB /* ColorType.swift */; };
 		8D89A9C027AFB5EC0030D435 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D89A9BF27AFB5EC0030D435 /* AppDelegate.swift */; };
 		8D89A9C227AFB5EC0030D435 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D89A9C127AFB5EC0030D435 /* SceneDelegate.swift */; };
 		8D89A9C927AFB5ED0030D435 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D89A9C827AFB5ED0030D435 /* Assets.xcassets */; };
@@ -32,6 +34,8 @@
 /* Begin PBXFileReference section */
 		49D131FAB4039C8826F40FBC /* Pods-PokemonAlamofile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokemonAlamofile.release.xcconfig"; path = "Target Support Files/Pods-PokemonAlamofile/Pods-PokemonAlamofile.release.xcconfig"; sourceTree = "<group>"; };
 		6D61D2227EDAD2B7B9C22531 /* Pods_PokemonAlamofile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokemonAlamofile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D6DB0D727B4E9470077E9EB /* MoveTableview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveTableview.swift; sourceTree = "<group>"; };
+		8D6DB0D927B4EE360077E9EB /* ColorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorType.swift; sourceTree = "<group>"; };
 		8D89A9BC27AFB5EC0030D435 /* PokemonAlamofile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokemonAlamofile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D89A9BF27AFB5EC0030D435 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D89A9C127AFB5EC0030D435 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 				8DE3FF1127B2189700099815 /* StatStackView.swift */,
 				8DE3FF1527B2191D00099815 /* AbilityCollectionView.swift */,
 				8D93C36327B4AF5900E2D40F /* AbilityCollectionViewCell.swift */,
+				8D6DB0D727B4E9470077E9EB /* MoveTableview.swift */,
 			);
 			path = PokemonInfo;
 			sourceTree = "<group>";
@@ -157,6 +162,7 @@
 		8DE3FF1927B22A2B00099815 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				8D6DB0D927B4EE360077E9EB /* ColorType.swift */,
 				8DE3FF1A27B22A5400099815 /* UIView+Extensions.swift */,
 			);
 			path = Utilities;
@@ -291,6 +297,7 @@
 				8D89A9C027AFB5EC0030D435 /* AppDelegate.swift in Sources */,
 				8D8D495227B3644A00F1C5C1 /* DisplayablePokemon.swift in Sources */,
 				8DE3FEF427AFCA9900099815 /* PokemonsViewController.swift in Sources */,
+				8D6DB0DA27B4EE360077E9EB /* ColorType.swift in Sources */,
 				8DE3FEFE27B0B29200099815 /* Pokemons.swift in Sources */,
 				8DE3FF1227B2189700099815 /* StatStackView.swift in Sources */,
 				8DE3FF0027B0B32B00099815 /* Pokemon.swift in Sources */,
@@ -300,6 +307,7 @@
 				8DE3FEFA27AFE5B200099815 /* Generations.swift in Sources */,
 				8DE3FF1B27B22A5400099815 /* UIView+Extensions.swift in Sources */,
 				8DE3FF1027B2188D00099815 /* ProfileStackView.swift in Sources */,
+				8D6DB0D827B4E9470077E9EB /* MoveTableview.swift in Sources */,
 				8DE3FEFC27AFE62F00099815 /* Generation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
