@@ -12,6 +12,8 @@ struct PokemonDetails: Decodable {
     let name: String
     let weight: Int
     let height: Int
+    let abilities: [ability]
+    let moves: [move]
     let types: [type]
     let image: image
     let stats: [stat]
@@ -19,6 +21,8 @@ struct PokemonDetails: Decodable {
         case name
         case weight
         case height
+        case abilities
+        case moves
         case types
         case image = "sprites"
         case stats
@@ -26,13 +30,21 @@ struct PokemonDetails: Decodable {
 }
 
 extension PokemonDetails: DisplayablePokemon {
-    
+
     var statsArray: Array<stat> {
         stats
     }
     
     var imageViewUrl: String {
         image.url
+    }
+    
+    var movesCell: Array<move> {
+        moves
+    }
+    
+    var abilitiesButton: Array<ability> {
+        abilities
     }
     
     var typeLabelText: (type1: String, type2: String) {
@@ -67,6 +79,33 @@ struct image: Decodable {
     
     enum CodingKeys: String, CodingKey {
         case url = "front_default"
+    }
+}
+
+struct move: Decodable {
+    let move: moveName
+    enum CodingKeys: String, CodingKey {
+        case move
+    }
+}
+
+struct moveName: Decodable {
+    let name: String
+}
+
+struct ability: Decodable {
+    let ability: abilityName
+    
+    enum CodingKeys: String, CodingKey {
+        case ability
+    }
+}
+
+struct abilityName: Decodable {
+    let name : String
+    
+    enum CodingKeys: String, CodingKey {
+        case name
     }
 }
 
