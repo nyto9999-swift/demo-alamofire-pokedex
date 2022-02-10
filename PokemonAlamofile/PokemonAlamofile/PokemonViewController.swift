@@ -9,7 +9,7 @@ import UIKit
 import Alamofire
 
 class PokemonViewController: UIViewController {
-
+    
     var url: String? //passing data
     var data: DisplayablePokemon?
     
@@ -23,7 +23,7 @@ class PokemonViewController: UIViewController {
     lazy var scrollViewContainer: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
-        view.spacing = 10
+        view.spacing = 20
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -51,17 +51,22 @@ class PokemonViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 100, height: 40)
+        layout.sectionInset = UIEdgeInsets(top: 0,left: 10,bottom: 0,right: 10);
         layout.minimumLineSpacing = 5
         layout.minimumInteritemSpacing = 1
+        
         let view = AbilityCollectionView(frame: .zero, collectionViewLayout: layout)
         view.isScrollEnabled = true
         view.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    lazy var moveTableView: UITableView = {
-        let view = UITableView()
-        view.backgroundColor = .darkGray
+    lazy var moveTableView: MoveTableView = {
+        let view = MoveTableView()
+        view.estimatedRowHeight = 44
+        view.isUserInteractionEnabled = true
+        view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -115,26 +120,29 @@ class PokemonViewController: UIViewController {
         let pokeUrl = url.replacingOccurrences(of: "-species", with: "", options: NSString.CompareOptions.literal, range: nil)
         print(pokeUrl)
         AF.request(pokeUrl)
-          .validate()
-          .responseDecodable(of: PokemonDetails.self) { [weak self] (response) in
-              guard let pokeDetails = response.value else { return }
-            
-              guard let self = self else { return }
-
-              self.data = pokeDetails
-              print(pokeDetails.abilities[0].ability.name)
-              DispatchQueue.main.async {
-                  self.profileStackView.data = self.data
-                  self.profileStackView.configure()
-                  self.statStackView.data = self.data
-                  self.statStackView.configure()
-                  self.abilityCollectionView.reloadData()
-                  self.moveTableView.reloadData()
-              }
-          }
+            .validate()
+            .responseDecodable(of: PokemonDetails.self) { [weak self] (response) in
+                guard let pokeDetails = response.value else { return }
+                
+                guard let self = self else { return }
+                
+                self.data = pokeDetails
+                print(pokeDetails.abilities[0].ability.name)
+                DispatchQueue.main.async {
+                    self.profileStackView.data = self.data
+                    self.profileStackView.configure()
+                    self.statStackView.data = self.data
+                    self.statStackView.configure()
+                    self.abilityCollectionView.reloadData()
+                    self.moveTableView.invalidateIntrinsicContentSize()
+                    self.moveTableView.reloadData()
+                }
+            }
         
     }
+    
 }
+
 
 extension PokemonViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -146,12 +154,13 @@ extension PokemonViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = abilityCollectionView.dequeueReusableCell(withReuseIdentifier: AbilityCollectionViewCell.identifier, for: indexPath) as! AbilityCollectionViewCell
         
-            cell.data = self.data?.abilitiesButton[indexPath.row].ability.name
-            print(self.data?.abilitiesButton[indexPath.row].ability.name)
-            cell.configure()
+        cell.data = self.data?.abilitiesButton[indexPath.row].ability.name
+        print(self.data?.abilitiesButton[indexPath.row].ability.name)
+        cell.configure()
         
         return cell
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
@@ -171,18 +180,11 @@ extension PokemonViewController: UITableViewDelegate, UITableViewDataSource {
         var content = cell.defaultContentConfiguration()
         content.text = data?.movesCell[indexPath.row].move.name
         cell.contentConfiguration = content
-        
-        
-        DispatchQueue.main.async { [ weak self] in
-            
-            guard let self = self else { return }
-
-            NSLayoutConstraint.activate([
-                self.moveTableView.heightAnchor.constraint(equalToConstant: self.moveTableView.contentSize.height)
-            ])
-        }
-        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }
 

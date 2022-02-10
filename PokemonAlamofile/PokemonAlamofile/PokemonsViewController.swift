@@ -17,7 +17,7 @@ class PokemonsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
-        fetchPokemons(for: generation!.subtitleLabelText)
+        fetchPokemons(for: generation!.subtitleLabelText) //url
     }
     
     func setTableView(){
