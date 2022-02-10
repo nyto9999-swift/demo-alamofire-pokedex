@@ -9,9 +9,10 @@ import UIKit
 import Alamofire
 
 class PokemonViewController: UIViewController {
-    
+
     var url: String? //passing data
     var data: DisplayablePokemon?
+    
     
     lazy var scrollView: UIScrollView = {
         let view = UIScrollView()
@@ -49,14 +50,12 @@ class PokemonViewController: UIViewController {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 45, height: 45)
-        let view = AbilityCollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        view.backgroundColor = .red
+        layout.itemSize = CGSize(width: 100, height: 40)
+        layout.minimumLineSpacing = 5
+        layout.minimumInteritemSpacing = 1
+        let view = AbilityCollectionView(frame: .zero, collectionViewLayout: layout)
         view.isScrollEnabled = true
-        view.layoutIfNeeded()
-        view.sizeToFit()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 50).isActive = true
         return view
     }()
     
@@ -79,11 +78,11 @@ class PokemonViewController: UIViewController {
         
         abilityCollectionView.delegate = self
         abilityCollectionView.dataSource = self
-        abilityCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        abilityCollectionView.register(AbilityCollectionViewCell.self, forCellWithReuseIdentifier: AbilityCollectionViewCell.identifier)
         
         moveTableView.delegate = self
         moveTableView.dataSource = self
-        moveTableView.register(UITableViewCell.self, forCellReuseIdentifier: "tcell")
+        moveTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         view.addSubview(scrollView)
         
@@ -123,12 +122,14 @@ class PokemonViewController: UIViewController {
               guard let self = self else { return }
 
               self.data = pokeDetails
-              
+              print(pokeDetails.abilities[0].ability.name)
               DispatchQueue.main.async {
                   self.profileStackView.data = self.data
                   self.profileStackView.configure()
                   self.statStackView.data = self.data
                   self.statStackView.configure()
+                  self.abilityCollectionView.reloadData()
+                  self.moveTableView.reloadData()
               }
           }
         
@@ -138,32 +139,49 @@ class PokemonViewController: UIViewController {
 extension PokemonViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        
+        return data?.abilitiesButton.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = abilityCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .green
-
-
-        NSLayoutConstraint.activate([
-            moveTableView.heightAnchor.constraint(equalToConstant: moveTableView.contentSize.height)
-        ])
+        let cell = abilityCollectionView.dequeueReusableCell(withReuseIdentifier: AbilityCollectionViewCell.identifier, for: indexPath) as! AbilityCollectionViewCell
+        
+            cell.data = self.data?.abilitiesButton[indexPath.row].ability.name
+            print(self.data?.abilitiesButton[indexPath.row].ability.name)
+            cell.configure()
+        
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.row)
+    }
 }
+
+
 
 extension PokemonViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return data?.movesCell.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "tcell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         var content = cell.defaultContentConfiguration()
-        content.text = "swords-dance"
+        content.text = data?.movesCell[indexPath.row].move.name
         cell.contentConfiguration = content
+        
+        
+        DispatchQueue.main.async { [ weak self] in
+            
+            guard let self = self else { return }
+
+            NSLayoutConstraint.activate([
+                self.moveTableView.heightAnchor.constraint(equalToConstant: self.moveTableView.contentSize.height)
+            ])
+        }
+        
         return cell
     }
 }
