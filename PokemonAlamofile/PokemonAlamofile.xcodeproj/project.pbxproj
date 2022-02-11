@@ -83,12 +83,13 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		8D79235F27B6257D0071DE14 /* PokemonList */ = {
+		8D79235F27B6257D0071DE14 /* PokemonsVC */ = {
 			isa = PBXGroup;
 			children = (
+				8DE3FEF327AFCA9900099815 /* PokemonsViewController.swift */,
 				8D79236427B62CFD0071DE14 /* PokemonCell.swift */,
 			);
-			name = PokemonList;
+			name = PokemonsVC;
 			sourceTree = "<group>";
 		};
 		8D89A9B327AFB5EC0030D435 = {
@@ -149,25 +150,24 @@
 		8DE3FEF227AFCA1E00099815 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8D79235F27B6257D0071DE14 /* PokemonList */,
-				8DE3FF1427B218BF00099815 /* PokemonDetails */,
-				8DE3FEEC27AFC73B00099815 /* GenerationsViewController.swift */,
-				8DE3FEF327AFCA9900099815 /* PokemonsViewController.swift */,
-				8DE3FEF527AFCAA800099815 /* PokemonViewController.swift */,
+				8DE5CC0D27B67DA00092B025 /* GenerationVC-root */,
+				8D79235F27B6257D0071DE14 /* PokemonsVC */,
+				8DE3FF1427B218BF00099815 /* PokemonVC */,
 			);
 			name = View;
 			sourceTree = "<group>";
 		};
-		8DE3FF1427B218BF00099815 /* PokemonDetails */ = {
+		8DE3FF1427B218BF00099815 /* PokemonVC */ = {
 			isa = PBXGroup;
 			children = (
+				8DE3FEF527AFCAA800099815 /* PokemonViewController.swift */,
 				8DE3FF0F27B2188D00099815 /* ProfileStackView.swift */,
 				8DE3FF1127B2189700099815 /* StatStackView.swift */,
 				8DE3FF1527B2191D00099815 /* AbilityCollectionView.swift */,
 				8D93C36327B4AF5900E2D40F /* AbilityCollectionViewCell.swift */,
 				8D6DB0D727B4E9470077E9EB /* MoveTableview.swift */,
 			);
-			path = PokemonDetails;
+			path = PokemonVC;
 			sourceTree = "<group>";
 		};
 		8DE3FF1927B22A2B00099815 /* Utilities */ = {
@@ -177,6 +177,14 @@
 				8DE3FF1A27B22A5400099815 /* UIView+Extensions.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		8DE5CC0D27B67DA00092B025 /* GenerationVC-root */ = {
+			isa = PBXGroup;
+			children = (
+				8DE3FEEC27AFC73B00099815 /* GenerationsViewController.swift */,
+			);
+			name = "GenerationVC-root";
 			sourceTree = "<group>";
 		};
 		FC5961898BFDA5D0286C5458 /* Frameworks */ = {

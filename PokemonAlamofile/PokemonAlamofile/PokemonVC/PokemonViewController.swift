@@ -10,9 +10,8 @@ import Alamofire
 
 class PokemonViewController: UIViewController {
     
-    var url: String? //passing data
+    var url: String? //passed data
     var data: DisplayablePokemon?
-    
     
     lazy var scrollView: UIScrollView = {
         let view = UIScrollView()
@@ -80,6 +79,9 @@ class PokemonViewController: UIViewController {
     }
     
     func setupViews(){
+        view.addSubview(scrollView)
+        scrollView.addSubview(scrollViewContainer)
+        scrollViewContainer.addArrangedSubviews(profileStackView, statStackView, abilityCollectionView, moveTableView)
         
         abilityCollectionView.delegate = self
         abilityCollectionView.dataSource = self
@@ -88,11 +90,6 @@ class PokemonViewController: UIViewController {
         moveTableView.delegate = self
         moveTableView.dataSource = self
         moveTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
-        view.addSubview(scrollView)
-        
-        scrollView.addSubview(scrollViewContainer)
-        scrollViewContainer.addArrangedSubviews(profileStackView, statStackView, abilityCollectionView, moveTableView)
     }
     
     func setupConstraints(){
@@ -113,22 +110,53 @@ class PokemonViewController: UIViewController {
             scrollViewContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
     }
+        
     
+    /// Fetch Pokemon details from PokeAPi
+    /// - Parameter url: "https://pokeapi.co/api/v2/pokemon/{id}"
+        
     func fetchPokemonInfo(with url: String?){
         guard let url = url else { return }
         
         let pokeUrl = url.replacingOccurrences(of: "-species", with: "", options: NSString.CompareOptions.literal, range: nil)
         
-        print(pokeUrl)
+        print("PokemonViewController Before url fetched by AF : \(pokeUrl)")
+        
+        
+        /*
+         PokemonDetails Model
+         {
+             "abilities":[...],     ✓
+             "base_experience":64,  ✓
+             "forms":[...],
+             "game_indices":[...],
+             "height":7,            ✓
+             "held_items":[...],
+             "id":1,
+             "is_default":true,
+             "location_area_encounters",
+             "moves":[...],
+             "name":"bulbasaur",
+             "order":1,
+             "past_types":[...],
+             "species":{...},
+             "sprites":{...},       ✓ poke image url
+             "stats":[...],         ✓
+             "types":[...],         ✓
+             "weight":69,           ✓
+         }
+         */
+        
         AF.request(pokeUrl)
             .validate()
             .responseDecodable(of: PokemonDetails.self) { [weak self] (response) in
-                guard let pokeDetails = response.value else { return }
                 
-                guard let self = self else { return }
+                guard let pokeDetails = response.value,
+                      let self = self
+                else { return }
                 
                 self.data = pokeDetails
-                print(pokeDetails.abilities[0].ability.name)
+                
                 DispatchQueue.main.async {
                     self.profileStackView.data = self.data
                     self.profileStackView.configure()
@@ -139,12 +167,10 @@ class PokemonViewController: UIViewController {
                     self.moveTableView.reloadData()
                 }
             }
-        
     }
-    
 }
 
-
+//MARK: collection view
 extension PokemonViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -168,8 +194,7 @@ extension PokemonViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
 }
 
-
-
+//MARK: table view
 extension PokemonViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

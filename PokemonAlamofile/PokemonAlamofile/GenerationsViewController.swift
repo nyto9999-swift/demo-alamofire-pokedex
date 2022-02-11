@@ -31,7 +31,33 @@ class GenerationsViewController: UIViewController {
 }
 
 extension GenerationsViewController {
+    
+    /// Fetch Pokemon generations
+    /// url: https://pokeapi.co/api/v2/generation/
+    
     func fetchGenerations() {
+        
+        /*
+         Generations model
+         {
+             "count":8,
+             "next":null,
+             "previous":null,
+             "results":[
+                 {
+                     "name":"generation-i",                           ✓
+                     "url":"https://pokeapi.co/api/v2/generation/1/", ✓
+                 },
+                 {
+                     "name":"generation-ii",
+                     "url":"https://pokeapi.co/api/v2/generation/2/",
+                 },
+                 {...}(2 hidden elements),
+                 {...}...
+             ]
+         }
+        */
+        
         AF.request("https://pokeapi.co/api/v2/generation/")
           .validate()
           .responseDecodable(of: Generations.self) { (response) in

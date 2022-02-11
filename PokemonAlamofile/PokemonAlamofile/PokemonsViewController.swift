@@ -12,15 +12,12 @@ import Kingfisher
 class PokemonsViewController: UIViewController {
     
     var generation: Displayable? //passed data
-    var data: DisplayablePokemon?
     var items: [Displayable] = []
     var filterItems: [Displayable] = []
     var isSearch: Bool = false
-    var imgUrlString: String?
     
-    var tableView = UITableView()
-    
-    
+    lazy var tableView = UITableView()
+        
     lazy var searchBar:UISearchBar = {
        let view = UISearchBar()
         view.searchBarStyle = UISearchBar.Style.default
@@ -47,27 +44,57 @@ class PokemonsViewController: UIViewController {
         tableView.register(PokemonCell.self, forCellReuseIdentifier: PokemonCell.identifier)
         tableView.rowHeight = 100
         tableView.pin(to: view)
-        
     }
     
     func setupConstraints(){
 
     }
-    
 }
 
 // MARK: AF call
 extension PokemonsViewController {
+    
+    
+    /// Fetch Pokemon name and urlString from PokeAPi
+    /// - Parameter url: https://pokeapi.co/api/v2/generation/{id}
+    
     func fetchPokeNameAndUrl(for url: String) {
-      AF.request(url).validate().responseDecodable(of: Pokemons.self) { (response) in
-        guard let pokemons = response.value else { return }
+        
+      /*
+       Pokemons Model
+       {
+           "abilities":[...],
+           "id":1,
+           "main_region":{...},
+           "moves":[...],
+           "name":"generation-i",
+           "names":[...],
+           "pokemon_species":[
+               {
+                   "name":"bulbasaur",                                   ✓
+                   "url":"https://pokeapi.co/api/v2/pokemon-species/1/", ✓
+               },
+               {...},
+               {...},...
+           ],
+           "types":[...],
+           "version_groups":[...])
+       }
+       */
+        
+      AF.request(url).validate().responseDecodable(of: Pokemons.self) { [weak self] (response) in
+          
+        guard let pokemons = response.value,
+              let self = self
+        else { return }
+          
         self.items = pokemons.all
         self.tableView.reloadData()
       }
     }
 }
 
-// MARK: tableview cell
+// MARK: tableview view
 extension PokemonsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -75,26 +102,24 @@ extension PokemonsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: PokemonCell.identifier) as! PokemonCell
         
         let item = isSearch ? filterItems[indexPath.row] : items[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: PokemonCell.identifier) as! PokemonCell
+        
         let urlString = item.subtitleLabelText.replacingOccurrences(of: "-species", with: "", options: NSString.CompareOptions.literal, range: nil)
-        cell.configure(for: urlString, text: item.titleLabelText)
+        cell.configure(for: urlString, title: item.titleLabelText)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let destinationVC = PokemonViewController()
         destinationVC.url = items[indexPath.row].subtitleLabelText
         self.navigationController?.pushViewController(destinationVC, animated: true)
-        
     }
 }
 
 //MARK: search bar
 extension PokemonsViewController: UISearchBarDelegate {
-    
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text == "" || searchBar.text == nil {
@@ -115,11 +140,9 @@ extension PokemonsViewController: UISearchBarDelegate {
         self.tableView.reloadData()
     }
     
-    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         self.tableView.reloadData()
         isSearch = false
     }
-
 }

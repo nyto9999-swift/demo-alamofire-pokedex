@@ -44,9 +44,9 @@ final class PokemonCell: UITableViewCell {
         ])
     }
     
-    func configure(for urlString:String, text: String){
+    func configure(for urlString:String, title: String){
         
-        textLabel1.text = text
+        textLabel1.text = title
         
         let cacheKey = urlString
         let cache = ImageCache.default
@@ -58,22 +58,22 @@ final class PokemonCell: UITableViewCell {
                 
                 switch result {
                     case .success(let value):
-                        print("Cache Image: \(value.image) CacheType: \(value.cacheType)")
+                        print("Cache Image: \(String(describing: value.image)) CacheType: \(value.cacheType)")
                         self.imageView1.image = value.image
                     case .failure(let error):
                         print("Error: \(error)")
                 }
             })
         }else {
-        
             AF.request(urlString)
                 .validate()
                 .responseDecodable(of: PokemonDetails.self) { [weak self] (response) in
-                    guard let pokeDetails = response.value else { print("pokedetails"); return  }
-                    guard let self = self else { return }
-                    guard let url = URL(string: pokeDetails.imageViewUrl) else { return }
                     
-                    
+                    guard let pokeDetails = response.value,
+                          let url = URL(string: pokeDetails.imageViewUrl),
+                          let self = self
+                    else { return }
+
                     print("sending..data: \(pokeDetails.imageViewUrl)")
                     
                     let resource = ImageResource(downloadURL: url, cacheKey: cacheKey)
