@@ -118,6 +118,7 @@ class PokemonViewController: UIViewController {
         guard let url = url else { return }
         
         let pokeUrl = url.replacingOccurrences(of: "-species", with: "", options: NSString.CompareOptions.literal, range: nil)
+        
         print(pokeUrl)
         AF.request(pokeUrl)
             .validate()

@@ -7,14 +7,19 @@
 
 import UIKit
 import Alamofire
+import Kingfisher
 
 class PokemonsViewController: UIViewController {
     
-    var generation: Displayable? //passing data
+    var generation: Displayable? //passed data
+    var data: DisplayablePokemon?
     var items: [Displayable] = []
     var filterItems: [Displayable] = []
     var isSearch: Bool = false
-    let tableView = UITableView()
+    var imgUrlString: String?
+    
+    var tableView = UITableView()
+    
     
     lazy var searchBar:UISearchBar = {
        let view = UISearchBar()
@@ -27,25 +32,33 @@ class PokemonsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setViews()
-        fetchPokemons(for: generation!.subtitleLabelText) //url
+        setupConstraints()
+        fetchPokeNameAndUrl(for: generation!.subtitleLabelText) //url
     }
     
     func setViews(){
+        view.addSubview(tableView)
+        
         self.navigationItem.titleView = searchBar
         searchBar.delegate = self
         
-        tableView.frame = view.bounds
         tableView.dataSource = self
         tableView.delegate = self
-        self.view.addSubview(tableView)
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(PokemonCell.self, forCellReuseIdentifier: PokemonCell.identifier)
+        tableView.rowHeight = 100
+        tableView.pin(to: view)
+        
+    }
+    
+    func setupConstraints(){
+
     }
     
 }
 
 // MARK: AF call
 extension PokemonsViewController {
-    func fetchPokemons(for url: String) {
+    func fetchPokeNameAndUrl(for url: String) {
       AF.request(url).validate().responseDecodable(of: Pokemons.self) { (response) in
         guard let pokemons = response.value else { return }
         self.items = pokemons.all
@@ -64,11 +77,9 @@ extension PokemonsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let item = isSearch ? filterItems[indexPath.row] : items[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        var content = cell.defaultContentConfiguration()
-        content.text = item.titleLabelText
-        content.secondaryText = String(indexPath.row)
-        cell.contentConfiguration = content
+        let cell = tableView.dequeueReusableCell(withIdentifier: PokemonCell.identifier) as! PokemonCell
+        let urlString = item.subtitleLabelText.replacingOccurrences(of: "-species", with: "", options: NSString.CompareOptions.literal, range: nil)
+        cell.configure(for: urlString, text: item.titleLabelText)
         return cell
     }
     
@@ -77,6 +88,7 @@ extension PokemonsViewController: UITableViewDelegate, UITableViewDataSource {
         let destinationVC = PokemonViewController()
         destinationVC.url = items[indexPath.row].subtitleLabelText
         self.navigationController?.pushViewController(destinationVC, animated: true)
+        
     }
 }
 
