@@ -45,30 +45,49 @@ final class PokemonCell: UITableViewCell {
     }
     
     func configure(for urlString:String, text: String){
+        
         textLabel1.text = text
         
+        let cacheKey = urlString
+        let cache = ImageCache.default
+        let cached = cache.isCached(forKey: urlString)
         
-        AF.request(urlString)
-            .validate()
-            .responseDecodable(of: PokemonDetails.self) { [weak self] (response) in
-                guard let pokeDetails = response.value else { print("pokedetails"); return  }
+        if cached {
+            cache.retrieveImage(forKey: cacheKey, completionHandler: { [weak self] result in
+                guard let self = self else { return }
                 
-                print("sending..data: \(pokeDetails.imageViewUrl)")
-                
-                guard let self = self else {
-                    return
+                switch result {
+                    case .success(let value):
+                        print("Cache Image: \(value.image) CacheType: \(value.cacheType)")
+                        self.imageView1.image = value.image
+                    case .failure(let error):
+                        print("Error: \(error)")
                 }
-
-                
-                self.imageView1.kf.setImage(with: URL(string: pokeDetails.imageViewUrl))
-            }
+            })
+        }else {
         
+            AF.request(urlString)
+                .validate()
+                .responseDecodable(of: PokemonDetails.self) { [weak self] (response) in
+                    guard let pokeDetails = response.value else { print("pokedetails"); return  }
+                    guard let self = self else { return }
+                    guard let url = URL(string: pokeDetails.imageViewUrl) else { return }
+                    
+                    
+                    print("sending..data: \(pokeDetails.imageViewUrl)")
+                    
+                    let resource = ImageResource(downloadURL: url, cacheKey: cacheKey)
+                    self.imageView1.kf.setImage(with: resource)
+                }
+        }
+        //https://github.com/onevcat/Kingfisher/wiki/Cheat-Sheet
     }
     
     override func prepareForReuse() {
          super.prepareForReuse()
-        textLabel1.text = ""
+        textLabel1.text = "Loading"
         imageView1.image = nil
+        imageView1.kf.indicatorType = .activity
      }
     
 }
