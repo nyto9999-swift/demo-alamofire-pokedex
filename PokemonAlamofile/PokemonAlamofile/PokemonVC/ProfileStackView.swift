@@ -87,6 +87,5 @@ extension ProfileStackView {
                               options: [
                                 .processor(processor)
                               ])
-        
     }
 }
