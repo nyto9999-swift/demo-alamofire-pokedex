@@ -49,7 +49,7 @@ class PokemonViewController: UIViewController {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 100, height: 40)
+        layout.itemSize = CGSize(width: 100, height: 50)
         layout.sectionInset = UIEdgeInsets(top: 0,left: 10,bottom: 0,right: 10);
         layout.minimumLineSpacing = 5
         layout.minimumInteritemSpacing = 1
@@ -61,12 +61,12 @@ class PokemonViewController: UIViewController {
         return view
     }()
     
-    lazy var moveTableView: MoveTableView = {
-        let view = MoveTableView()
-        view.estimatedRowHeight = 44
-        view.isUserInteractionEnabled = true
-        view.clipsToBounds = true
-        view.translatesAutoresizingMaskIntoConstraints = false
+    lazy var moveButton: UIButton = {
+        let view = UIButton()
+        view.setTitle("Moves:", for: .normal)
+        view.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        view.addTarget(self, action: #selector(pressedMove), for: .touchUpInside)
+        view.backgroundColor = .red
         return view
     }()
     
@@ -81,15 +81,11 @@ class PokemonViewController: UIViewController {
     func setupViews(){
         view.addSubview(scrollView)
         scrollView.addSubview(scrollViewContainer)
-        scrollViewContainer.addArrangedSubviews(profileStackView, statStackView, abilityCollectionView, moveTableView)
+        scrollViewContainer.addArrangedSubviews(profileStackView, statStackView, abilityCollectionView, moveButton)
         
         abilityCollectionView.delegate = self
         abilityCollectionView.dataSource = self
         abilityCollectionView.register(AbilityCollectionViewCell.self, forCellWithReuseIdentifier: AbilityCollectionViewCell.identifier)
-        
-        moveTableView.delegate = self
-        moveTableView.dataSource = self
-        moveTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     func setupConstraints(){
@@ -110,7 +106,12 @@ class PokemonViewController: UIViewController {
             scrollViewContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
     }
-        
+    
+    @objc func pressedMove(){
+        let destinationVC = MovesTableViewController()
+        destinationVC.data = self.data?.movesCell
+        self.navigationController?.pushViewController(destinationVC, animated: true)
+    }
     
     /// Fetch Pokemon details from PokeAPi
     /// - Parameter url: "https://pokeapi.co/api/v2/pokemon/{id}"
@@ -121,32 +122,7 @@ class PokemonViewController: UIViewController {
         let pokeUrl = url.replacingOccurrences(of: "-species", with: "", options: NSString.CompareOptions.literal, range: nil)
         
         print("PokemonViewController Before url fetched by AF : \(pokeUrl)")
-        
-        
-        /*
-         PokemonDetails Model
-         {
-             "abilities":[...],     ✓
-             "base_experience":64,  ✓
-             "forms":[...],
-             "game_indices":[...],
-             "height":7,            ✓
-             "held_items":[...],
-             "id":1,
-             "is_default":true,
-             "location_area_encounters",
-             "moves":[...],
-             "name":"bulbasaur",
-             "order":1,
-             "past_types":[...],
-             "species":{...},
-             "sprites":{...},       ✓ poke image url
-             "stats":[...],         ✓
-             "types":[...],         ✓
-             "weight":69,           ✓
-         }
-         */
-        
+    
         AF.request(pokeUrl)
             .validate()
             .responseDecodable(of: PokemonDetails.self) { [weak self] (response) in
@@ -162,9 +138,8 @@ class PokemonViewController: UIViewController {
                     self.profileStackView.configure()
                     self.statStackView.data = self.data
                     self.statStackView.configure()
+                    self.moveButton.setTitle("Moves: \(pokeDetails.movesCell.count)", for: .normal)
                     self.abilityCollectionView.reloadData()
-                    self.moveTableView.invalidateIntrinsicContentSize()
-                    self.moveTableView.reloadData()
                 }
             }
     }
@@ -188,29 +163,10 @@ extension PokemonViewController: UICollectionViewDelegate, UICollectionViewDataS
         return cell
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
     }
 }
 
-//MARK: table view
-extension PokemonViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data?.movesCell.count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        var content = cell.defaultContentConfiguration()
-        content.text = data?.movesCell[indexPath.row].move.name
-        cell.contentConfiguration = content
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-}
+
 

@@ -11,16 +11,8 @@ class AbilityCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "AbilityColeectionViewCell"
     var data: String?
-    
-    private let button: UIButton = {
-       let view = UIButton()
-        view.setTitle("Ability", for: .normal)
-        view.backgroundColor = .systemGray2
-        view.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        view.isUserInteractionEnabled = false
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+
+    private lazy var textLabel: UILabel = textLabel(align: .center)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,11 +27,14 @@ class AbilityCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupViews(){
-        contentView.addSubviews(button)
+        contentView.addSubviews(textLabel)
     }
     
     private func setupConstraints(){
-        button.frame = contentView.frame
+        NSLayoutConstraint.activate([
+            textLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor),
+            textLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor)
+        ])
     }
     
     
@@ -50,12 +45,14 @@ class AbilityCollectionViewCell: UICollectionViewCell {
     public func configure() {
 
         guard let data = data else { return }
-        button.setTitle(data, for: .normal)
+        
+        textLabel.text = data
+        
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        button.setTitle(nil, for: .normal)
+        textLabel.text = ""
         
     }
 

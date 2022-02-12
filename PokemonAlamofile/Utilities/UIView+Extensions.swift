@@ -15,7 +15,7 @@ public extension UIView {
         topAnchor.constraint(equalTo: superView.topAnchor).isActive = true
         leadingAnchor.constraint(equalTo: superView.leadingAnchor).isActive = true
         trailingAnchor.constraint(equalTo: superView.trailingAnchor).isActive = true
-        bottomAnchor.constraint(equalTo: superView.bottomAnchor).isActive = true
+        bottomAnchor.constraint(equalTo: superView.bottomAnchor, constant: -20.0).isActive = true
     }
     
     func addSubviews(_ views: UIView...) {
@@ -38,10 +38,10 @@ public extension UIView {
         return view
     }
     
-    func textLabel() -> UILabel {
+    func textLabel(align: NSTextAlignment? = .left) -> UILabel {
         let view = UILabel()
         view.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        view.textAlignment = .left
+        view.textAlignment = align!
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }

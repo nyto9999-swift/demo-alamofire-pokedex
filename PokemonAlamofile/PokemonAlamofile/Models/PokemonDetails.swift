@@ -4,6 +4,29 @@
 //
 //  Created by 宇宣 Chen on 2022/2/9.
 //
+/*
+ PokemonDetails Model
+ {
+     "abilities":[...],     ✓
+     "base_experience":64,  ✓
+     "forms":[...],
+     "game_indices":[...],
+     "height":7,            ✓
+     "held_items":[...],
+     "id":1,
+     "is_default":true,
+     "location_area_encounters",
+     "moves":[...],
+     "name":"bulbasaur",
+     "order":1,
+     "past_types":[...],
+     "species":{...},
+     "sprites":{...},       ✓ poke image url
+     "stats":[...],         ✓
+     "types":[...],         ✓
+     "weight":69,           ✓
+ }
+ */
 
 import SwiftUI
 
@@ -84,6 +107,7 @@ struct image: Decodable {
 
 struct move: Decodable {
     let move: moveName
+    
     enum CodingKeys: String, CodingKey {
         case move
     }
@@ -91,6 +115,7 @@ struct move: Decodable {
 
 struct moveName: Decodable {
     let name: String
+    let url: String
 }
 
 struct ability: Decodable {
