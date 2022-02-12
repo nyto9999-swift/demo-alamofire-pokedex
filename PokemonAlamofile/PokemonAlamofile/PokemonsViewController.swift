@@ -58,29 +58,7 @@ extension PokemonsViewController {
     /// - Parameter url: https://pokeapi.co/api/v2/generation/{id}
     
     func fetchPokeNameAndUrl(for url: String) {
-        
-      /*
-       Pokemons Model
-       {
-           "abilities":[...],
-           "id":1,
-           "main_region":{...},
-           "moves":[...],
-           "name":"generation-i",
-           "names":[...],
-           "pokemon_species":[
-               {
-                   "name":"bulbasaur",                                   ✓
-                   "url":"https://pokeapi.co/api/v2/pokemon-species/1/", ✓
-               },
-               {...},
-               {...},...
-           ],
-           "types":[...],
-           "version_groups":[...])
-       }
-       */
-        
+                
       AF.request(url).validate().responseDecodable(of: Pokemons.self) { [weak self] (response) in
           
         guard let pokemons = response.value,
@@ -112,7 +90,8 @@ extension PokemonsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let destinationVC = PokemonViewController()
-        destinationVC.url = items[indexPath.row].subtitleLabelText
+        
+        destinationVC.url = isSearch ? filterItems[indexPath.row].subtitleLabelText : items[indexPath.row].subtitleLabelText
         self.navigationController?.pushViewController(destinationVC, animated: true)
     }
 }

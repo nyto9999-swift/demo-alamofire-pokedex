@@ -30,13 +30,14 @@ final class GenerationCell: UITableViewCell {
     }
     
     func setupConstraints(){
+        
         imageView1.pin(to: contentView)
     }
     
     
     func configure(for index: Int){
-        
         self.imageView1.image = UIImage(named: "g\(index + 1)")
+        
     }
 
 }

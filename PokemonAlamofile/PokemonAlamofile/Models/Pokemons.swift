@@ -14,11 +14,24 @@ struct Pokemons: Decodable {
     }
 }
 
-struct Search: Decodable {
-    let id: Int
-    let name: String
-    enum CodingKeys: String, CodingKey {
-      case name
-      case id
-    }
-}
+/*
+ Pokemons Model
+ {
+     "abilities":[...],
+     "id":1,
+     "main_region":{...},
+     "moves":[...],
+     "name":"generation-i",
+     "names":[...],
+     "pokemon_species":[
+         {
+             "name":"bulbasaur",                                   ✓
+             "url":"https://pokeapi.co/api/v2/pokemon-species/1/", ✓
+         },
+         {...},
+         {...},...
+     ],
+     "types":[...],
+     "version_groups":[...])
+ }
+ */

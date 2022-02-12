@@ -28,13 +28,14 @@ class GenerationsViewController: UIViewController {
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.separatorStyle = .none
         
         tableView.register(GenerationCell.self, forCellReuseIdentifier: GenerationCell.identifier)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func setupConstraints(){
         tableView.pin(to: view)
-        tableView.rowHeight = (view.frame.height - 100 ) / 8
     }
 }
 
@@ -44,28 +45,7 @@ extension GenerationsViewController {
     /// url: https://pokeapi.co/api/v2/generation/
     
     func fetchGenerations() {
-        
-        /*
-         Generations model
-         {
-             "count":8,
-             "next":null,
-             "previous":null,
-             "results":[
-                 {
-                     "name":"generation-i",                           ✓
-                     "url":"https://pokeapi.co/api/v2/generation/1/", ✓
-                 },
-                 {
-                     "name":"generation-ii",
-                     "url":"https://pokeapi.co/api/v2/generation/2/",
-                 },
-                 {...}(2 hidden elements),
-                 {...}...
-             ]
-         }
-        */
-        
+            
         AF.request("https://pokeapi.co/api/v2/generation/")
           .validate()
           .responseDecodable(of: Generations.self) { (response) in
@@ -74,8 +54,6 @@ extension GenerationsViewController {
             self.tableView.reloadData()
           }
     }
-
-    
 }
 
 extension GenerationsViewController: UITableViewDelegate, UITableViewDataSource {

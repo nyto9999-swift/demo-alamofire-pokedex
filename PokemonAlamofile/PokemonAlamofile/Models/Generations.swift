@@ -16,3 +16,24 @@ struct Generations: Decodable {
     case all = "results"
   }
 }
+
+/*
+ Generations model
+ {
+     "count":8,
+     "next":null,
+     "previous":null,
+     "results":[
+         {
+             "name":"generation-i",                           ✓
+             "url":"https://pokeapi.co/api/v2/generation/1/", ✓
+         },
+         {
+             "name":"generation-ii",
+             "url":"https://pokeapi.co/api/v2/generation/2/",
+         },
+         {...}(2 hidden elements),
+         {...}...
+     ]
+ }
+*/

@@ -35,7 +35,7 @@ final class PokemonCell: UITableViewCell {
         NSLayoutConstraint.activate([
             imageView1.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             imageView1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
-            imageView1.heightAnchor.constraint(equalToConstant: 96.5),
+            imageView1.heightAnchor.constraint(equalToConstant: 96.0),
             imageView1.widthAnchor.constraint(equalToConstant: 96.0)
         ])
         NSLayoutConstraint.activate([
@@ -59,9 +59,10 @@ final class PokemonCell: UITableViewCell {
                 
                 switch result {
                     case .success(let value):
-                        print("Cache Image: \(String(describing: value.image)) CacheType: \(value.cacheType)")
                         self.imageView1.image = value.image
-                        print("Height: \(self.imageView1.frame.height)  Width: \(self.imageView1.frame.width)")
+                        
+//                        print("Cache Image: \(String(describing: value.image)) CacheType: \(value.cacheType)")
+//                        print("Height: \(self.imageView1.frame.height)  Width: \(self.imageView1.frame.width)")
                     case .failure(let error):
                         print("Error: \(error)")
                 }
@@ -79,11 +80,25 @@ final class PokemonCell: UITableViewCell {
                     print("sending..data: \(pokeDetails.imageViewUrl)")
                     
                     let resource = ImageResource(downloadURL: url, cacheKey: cacheKey)
-    
                     
                     self.imageView1.kf.indicatorType = .activity
                     self.imageView1.kf.setImage(
-                        with: resource)
+                        with: resource,
+                        options: [.waitForCache,
+                                  .transition(.flipFromLeft(0.4))
+                                 ],
+                        progressBlock: { receivedSize,totalSize in
+                            let percentage = (Float(receivedSize) / Float(totalSize)) * 100.0
+                            print("dowloading progress: \(percentage)%")
+                        },
+                        completionHandler: { result in
+                            switch result {
+                                case .success(let result):
+                                    self.imageView1.sizeThatFits(result.image.size)
+                                case .failure(let error):
+                                    print(error)
+                            }
+                        })
                     
                 }
         }

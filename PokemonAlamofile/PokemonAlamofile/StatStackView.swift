@@ -74,29 +74,43 @@ extension StatStackView {
         }
         
         textLabel1.text = "HP: \(data.statsArray[0].value)"
-        barView1.progress =  Float(1.0 - (160.0 - Double(data.statsArray[0].value)) / 160.0)
-        barView1.progressTintColor = .systemMint
-        
         textLabel2.text = "Attack: \(data.statsArray[1].value)"
-        barView2.progress = Float(1.0 - (150.0 - Double(data.statsArray[1].value)) / 150.0)
-        barView2.progressTintColor = .systemOrange
-        
         textLabel3.text = "Defense: \(data.statsArray[2].value)"
-        barView3.progress = Float(1.0 - (150.0 - Double(data.statsArray[2].value)) / 150.0)
-        barView3.progressTintColor = .systemYellow
-        
         textLabel4.text = "Special Attack: \(data.statsArray[3].value)"
-        barView4.progress = Float(1.0 - (150.0 - Double(data.statsArray[3].value)) / 150.0)
-        barView4.progressTintColor = .systemCyan
-        
         textLabel5.text = "Special Defense: \(data.statsArray[4].value)"
-        barView5.progress = Float(1.0 - (150.0 - Double(data.statsArray[4].value)) / 150.0)
-        barView5.progressTintColor = .systemGreen
-        
         textLabel6.text = "Speed: \(data.statsArray[5].value)"
-        barView6.progress = Float(1.0 - (150.0 - Double(data.statsArray[5].value)) / 150.0)
+        barView1.progressTintColor = .systemMint
+        barView2.progressTintColor = .systemOrange
+        barView3.progressTintColor = .systemYellow
+        barView4.progressTintColor = .systemCyan
+        barView5.progressTintColor = .systemGreen
         barView6.progressTintColor = .systemPink
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            
+            self.barView1.setProgress(Float(1.0 - (160.0 - Double(data.statsArray[0].value)) / 160.0), animated: false)
+            self.barView2.setProgress(Float(1.0 - (160.0 - Double(data.statsArray[1].value)) / 160.0), animated: false)
+            self.barView3.setProgress(Float(1.0 - (160.0 - Double(data.statsArray[2].value)) / 160.0), animated: false)
+            self.barView4.setProgress(Float(1.0 - (160.0 - Double(data.statsArray[3].value)) / 160.0), animated: false)
+            self.barView5.setProgress(Float(1.0 - (160.0 - Double(data.statsArray[4].value)) / 160.0), animated: false)
+            self.barView6.setProgress(Float(1.0 - (160.0 - Double(data.statsArray[5].value)) / 160.0), animated: false)
+            
+            UIViewPropertyAnimator.runningPropertyAnimator(
+                withDuration: 0.65, delay: 0,
+                options: [
+                    .curveEaseIn,
+                    .preferredFramesPerSecond60
+                ], animations: {
+                    
+                self.barView1.layoutIfNeeded()
+                self.barView2.layoutIfNeeded()
+                self.barView3.layoutIfNeeded()
+                self.barView4.layoutIfNeeded()
+                self.barView5.layoutIfNeeded()
+                self.barView6.layoutIfNeeded()
+                    
+            })
+        }
 //        print("data\( Float(1.0 - (500.0 - Double(data.statsArray[0].s)) / 500.0))")
     }
 }
