@@ -35,7 +35,8 @@ final class PokemonCell: UITableViewCell {
         NSLayoutConstraint.activate([
             imageView1.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             imageView1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
-            imageView1.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5)
+            imageView1.heightAnchor.constraint(equalToConstant: 96.5),
+            imageView1.widthAnchor.constraint(equalToConstant: 96.0)
         ])
         NSLayoutConstraint.activate([
             textLabel1.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
@@ -60,6 +61,7 @@ final class PokemonCell: UITableViewCell {
                     case .success(let value):
                         print("Cache Image: \(String(describing: value.image)) CacheType: \(value.cacheType)")
                         self.imageView1.image = value.image
+                        print("Height: \(self.imageView1.frame.height)  Width: \(self.imageView1.frame.width)")
                     case .failure(let error):
                         print("Error: \(error)")
                 }
@@ -77,19 +79,16 @@ final class PokemonCell: UITableViewCell {
                     print("sending..data: \(pokeDetails.imageViewUrl)")
                     
                     let resource = ImageResource(downloadURL: url, cacheKey: cacheKey)
-                    self.imageView1.kf.setImage(with: resource)
+    
+                    
+                    self.imageView1.kf.indicatorType = .activity
+                    self.imageView1.kf.setImage(
+                        with: resource)
+                    
                 }
         }
         //https://github.com/onevcat/Kingfisher/wiki/Cheat-Sheet
     }
-    
-    override func prepareForReuse() {
-         super.prepareForReuse()
-        textLabel1.text = "Loading"
-        imageView1.image = nil
-        imageView1.kf.indicatorType = .activity
-     }
-    
 }
 
 

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 public extension UIView {
     
@@ -80,4 +81,33 @@ public extension UIStackView {
     }
 }
 
+public extension UIImageView {
+   func loadImage(_ url : URL?) {
+       self.kf.indicatorType = .activity
+       self.kf.setImage(with: url)
+   }
 
+   func loadImage(_ url : String?) {
+       guard let urlStr = url else {return}
+       self.kf.setImage(with: URL.init(string: urlStr))
+   }
+        
+    func loadImage(_ url : ImageResource?) {
+        self.kf.indicatorType = .activity
+        self.kf.setImage(with: url)
+    }
+
+}
+
+
+
+public var logoUrl = [
+    "https://archives.bulbagarden.net/media/upload/archive/5/55/20210623191331%21Lets_Go_Pikachu_Logo_JP.png",
+    "https://archives.bulbagarden.net/media/upload/9/90/HeartGold_logo.png",
+    "https://archives.bulbagarden.net/media/upload/8/8c/Pokemon_FireRed_Logo_JP.png",
+    "https://archives.bulbagarden.net/media/upload/a/ae/Pokemon_Pearl_Logo_JP.png",
+    "https://archives.bulbagarden.net/media/upload/thumb/a/ae/Pokémon_Black_EN_logo.png/320px-Pokémon_Black_EN_logo.png",
+    "https://archives.bulbagarden.net/media/upload/thumb/4/4c/Pokémon_XY_logo.png/320px-Pokémon_XY_logo.png",
+    "https://archives.bulbagarden.net/media/upload/c/c7/Pokemon_Sun_logo.png",
+    "https://archives.bulbagarden.net/media/upload/thumb/f/f4/Sword_Shield_Expansion_Pass_logo_EN.png/320px-Sword_Shield_Expansion_Pass_logo_EN.png"
+]

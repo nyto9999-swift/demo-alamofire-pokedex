@@ -42,12 +42,11 @@ class PokemonsViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(PokemonCell.self, forCellReuseIdentifier: PokemonCell.identifier)
-        tableView.rowHeight = 100
-        tableView.pin(to: view)
     }
     
     func setupConstraints(){
-
+        tableView.rowHeight = 96.5
+        tableView.pin(to: view)
     }
 }
 

@@ -7,26 +7,34 @@
 
 import UIKit
 import Alamofire
+import Kingfisher
 
 class GenerationsViewController: UIViewController {
 
     var items: [Displayable] = []
     var chosenItem: Displayable?
-    
     let tableView = UITableView()
+    var imageSet = [UIImage]()
+
 
     override func viewDidLoad() {
       super.viewDidLoad()
       setTableView()
+      setupConstraints()
       fetchGenerations()
     }
     
     func setTableView(){
-        tableView.frame = view.bounds
+        view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
-        self.view.addSubview(tableView)
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
+        tableView.register(GenerationCell.self, forCellReuseIdentifier: GenerationCell.identifier)
+    }
+    
+    func setupConstraints(){
+        tableView.pin(to: view)
+        tableView.rowHeight = (view.frame.height - 100 ) / 8
     }
 }
 
@@ -66,6 +74,8 @@ extension GenerationsViewController {
             self.tableView.reloadData()
           }
     }
+
+    
 }
 
 extension GenerationsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -75,12 +85,10 @@ extension GenerationsViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = items[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        var content = cell.defaultContentConfiguration()
-        content.text = item.titleLabelText
-        content.secondaryText = item.subtitleLabelText
-        cell.contentConfiguration = content
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: GenerationCell.identifier, for: indexPath) as! GenerationCell
+        
+        cell.configure(for: indexPath.row)
         return cell
     }
     
