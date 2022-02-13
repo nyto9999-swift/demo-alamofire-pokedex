@@ -24,6 +24,8 @@ class PokemonViewController: UIViewController {
         view.axis = .vertical
         view.spacing = 20
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.isLayoutMarginsRelativeArrangement = true
+        view.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 20)
         return view
     }()
     
@@ -44,20 +46,23 @@ class PokemonViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+
     
     lazy var abilityCollectionView: AbilityCollectionView = {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 100, height: 50)
-        layout.sectionInset = UIEdgeInsets(top: 0,left: 10,bottom: 0,right: 10);
         layout.minimumLineSpacing = 5
         layout.minimumInteritemSpacing = 1
+        
         
         let view = AbilityCollectionView(frame: .zero, collectionViewLayout: layout)
         view.isScrollEnabled = true
         view.heightAnchor.constraint(equalToConstant: 50).isActive = true
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.sizeToFit()
+        
         return view
     }()
     
@@ -70,6 +75,8 @@ class PokemonViewController: UIViewController {
         return view
     }()
     
+    private lazy var descriptionLabel: UILabel = textLabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -81,7 +88,7 @@ class PokemonViewController: UIViewController {
     func setupViews(){
         view.addSubview(scrollView)
         scrollView.addSubview(scrollViewContainer)
-        scrollViewContainer.addArrangedSubviews(profileStackView, statStackView, abilityCollectionView, moveButton)
+        scrollViewContainer.addArrangedSubviews(profileStackView, statStackView, abilityCollectionView, moveButton, descriptionLabel)
         
         abilityCollectionView.delegate = self
         abilityCollectionView.dataSource = self
@@ -105,6 +112,9 @@ class PokemonViewController: UIViewController {
             // this is important for scrolling
             scrollViewContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
+        
+        
+
     }
     
     @objc func pressedMove(){
@@ -113,17 +123,33 @@ class PokemonViewController: UIViewController {
         self.navigationController?.pushViewController(destinationVC, animated: true)
     }
     
-    /// Fetch Pokemon details from PokeAPi
-    /// - Parameter url: "https://pokeapi.co/api/v2/pokemon/{id}"
+    
         
     func fetchPokemonInfo(with url: String?){
         guard let url = url else { return }
         
-        let pokeUrl = url.replacingOccurrences(of: "-species", with: "", options: NSString.CompareOptions.literal, range: nil)
+        /// Fetch Pokemon details from PokeAPi
+        /// - Parameter url: "https://pokeapi.co/api/v2/pokemon-species/{id}/"
+        AF.request(url)
+            .validate()
+            .responseDecodable(of: PokemonDescriptions.self) { [weak self] (response) in
+                
+                guard let pokeDescriptions = response.value,
+                      let self = self
+                else { return }
+                
+                
+                self.descriptionLabel.text = pokeDescriptions.text.description.replacingOccurrences(of: "\n", with: " ")
+            }
         
-        print("PokemonViewController Before url fetched by AF : \(pokeUrl)")
+        let detailsUrl = url.replacingOccurrences(of: "-species", with: "", options: NSString.CompareOptions.literal, range: nil)
+        
+        print("PokemonViewController Before url fetched by AF : \(detailsUrl)")
     
-        AF.request(pokeUrl)
+        
+        /// Fetch Pokemon details from PokeAPi
+        /// - Parameter url: "https://pokeapi.co/api/v2/pokemon/{id}"
+        AF.request(detailsUrl)
             .validate()
             .responseDecodable(of: PokemonDetails.self) { [weak self] (response) in
                 

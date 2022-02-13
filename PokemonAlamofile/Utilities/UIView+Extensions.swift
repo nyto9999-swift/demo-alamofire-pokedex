@@ -8,6 +8,20 @@
 import UIKit
 import Kingfisher
 
+public extension UIViewController {
+    
+    func textLabel(align: NSTextAlignment? = .left) -> UILabel {
+        let view = UILabel()
+        view.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        view.textAlignment = align!
+        view.numberOfLines = 0
+        view.lineBreakMode = .byWordWrapping
+        view.sizeToFit()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }
+}
+
 public extension UIView {
     
     func pin(to superView: UIView) {
@@ -18,11 +32,22 @@ public extension UIView {
         bottomAnchor.constraint(equalTo: superView.bottomAnchor, constant: -20.0).isActive = true
     }
     
+    
+    func typeButton() -> UIButton {
+        var configuration = UIButton.Configuration.filled()
+        configuration.cornerStyle = .capsule
+        configuration.baseBackgroundColor = .white
+        let view = UIButton(configuration: configuration)
+        view.setTitleColor(.black, for: .normal)
+        return view
+    }
+    
     func addSubviews(_ views: UIView...) {
         for view in views {
             addSubview(view)
         }
     }
+    
     
     func statRow() -> UIStackView  {
         let view = UIStackView()
@@ -42,6 +67,9 @@ public extension UIView {
         let view = UILabel()
         view.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         view.textAlignment = align!
+        view.numberOfLines = 0
+        view.lineBreakMode = .byWordWrapping
+        view.sizeToFit()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }
@@ -81,25 +109,51 @@ public extension UIStackView {
     }
 }
 
-public extension UIImageView {
-   func loadImage(_ url : URL?) {
-       self.kf.indicatorType = .activity
-       self.kf.setImage(with: url)
-   }
 
-   func loadImage(_ url : String?) {
-       guard let urlStr = url else {return}
-       self.kf.setImage(with: URL.init(string: urlStr))
-   }
-        
-    func loadImage(_ url : ImageResource?) {
-        self.kf.indicatorType = .activity
-        self.kf.setImage(with: url)
-    }
-
+func getTypeColor(for type: String) -> UIColor {
+        switch type {
+            case "normal":
+                return .lightGray
+            case "grass":
+                return .systemGreen
+            case "fire":
+                return .orange
+            case "water":
+                return .systemBlue
+            case "electric":
+                return .systemYellow
+            case "ice":
+                return .systemCyan
+            case "fighting":
+                return .systemRed
+            case "poison":
+                return .purple
+            case "flying":
+                return .systemCyan
+            case "psychic":
+                return .systemPink
+            case "bug":
+                return .green
+            case "rock":
+                return .brown
+            case "ghost":
+                return .systemPurple
+            case "ground":
+                return .systemBrown
+            case "dark":
+                return .darkGray
+            case "dragon":
+                return .purple
+            case "steel":
+                return .systemGray3
+            case "fairy":
+                return .systemPink
+            default:
+                return .white
+        }
 }
 
-
+var gens = ["Yellow", "Gold.Sliver", "Ruby.Sapphire", "Diamand.Pearl", "Black.White", "X.Y", "Sun.Moon", "Sword.Shield"]
 
 public var logoUrl = [
     "https://archives.bulbagarden.net/media/upload/archive/5/55/20210623191331%21Lets_Go_Pikachu_Logo_JP.png",
