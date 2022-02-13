@@ -13,11 +13,11 @@ final class GenerationCell: UITableViewCell {
     
     static let identifier = "GenerationCell"
 
-    public lazy var imageView1: UIImageView = imageView()
+    public lazy var textLabel1: UILabel = textLabel(align: .center)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubviews(imageView1)
+        contentView.addSubviews(textLabel1)
         setupConstraints()
     }
     
@@ -31,12 +31,13 @@ final class GenerationCell: UITableViewCell {
     
     func setupConstraints(){
         
-        imageView1.pin(to: contentView)
+        textLabel1.pin(to: contentView)
     }
     
     
     func configure(for index: Int){
-        self.imageView1.image = UIImage(named: "g\(index + 1)")
+        
+        textLabel1.text = gens[index]
         
     }
 

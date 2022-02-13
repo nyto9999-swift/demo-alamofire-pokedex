@@ -28,10 +28,11 @@ class GenerationsViewController: UIViewController {
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.separatorStyle = .none
+        tableView.rowHeight = 100
         
         tableView.register(GenerationCell.self, forCellReuseIdentifier: GenerationCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        
     }
     
     func setupConstraints(){

@@ -28,7 +28,7 @@
  }
  */
 
-import SwiftUI
+import UIKit
 
 struct PokemonDetails: Decodable {
     

@@ -11,8 +11,16 @@ class AbilityCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "AbilityColeectionViewCell"
     var data: String?
-
-    private lazy var textLabel: UILabel = textLabel(align: .center)
+    
+    private lazy var textLabel: UILabel = {
+       let view = UILabel()
+        view.numberOfLines = 0
+        view.lineBreakMode = .byWordWrapping
+        view.sizeToFit()
+        view.textAlignment = .center
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
