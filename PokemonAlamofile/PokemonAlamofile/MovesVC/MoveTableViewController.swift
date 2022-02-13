@@ -6,16 +6,19 @@
 //
 
 import UIKit
+import Alamofire
+
 
 class MovesTableViewController: UITableViewController {
 
     var data: Array<move>? //passed move's name and url
-    
+
     override func viewDidLoad() {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         super.viewDidLoad()
-    }
 
+        
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data?.count ?? 0
@@ -32,9 +35,13 @@ class MovesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let destinationVC = MoveDetailsViewController()
+        print("move: \(data?[indexPath.row].move.name) URL: \(data?[indexPath.row].move.url)")
         
-        let destinationVC = PokemonViewController()
-        destinationVC.url = "https://pokeapi.co/api/v2/pokemon/1"
+        
+        destinationVC.data = data?[indexPath.row].move
+        
+        destinationVC.modalTransitionStyle = .crossDissolve
         self.present(destinationVC, animated: true)
     }
 }
