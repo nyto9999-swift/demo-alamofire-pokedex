@@ -32,8 +32,6 @@ struct language: Decodable {
     }
 }
 
-
-
 extension PokemonDescriptions: DisplayablePokemonDescription {
     var text: String {
         

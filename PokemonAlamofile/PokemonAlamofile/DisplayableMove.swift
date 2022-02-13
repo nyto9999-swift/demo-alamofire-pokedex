@@ -6,14 +6,13 @@
 //
 
 protocol DisplayableMove {
-    var imageViewUrl: String { get }
-    var nameLabelText: String { get }
-    var hwLabelText: (height: Int, weight: Int) { get }
-    var typeLabelText: (type1: String, type2: String) { get }
-    var abilitiesButton: Array<ability> { get }
-    var movesCell: Array<move> { get }
-    var statsArray: Array<stat> { get }
+    var accuracyLabel: String { get }
+    var powerLabel: String { get }
+    var typeLabel: String { get }
+    var ppLabel: String { get }
+    var moveDescription: String { get }
 }
+
 
 /*
  {
@@ -21,7 +20,7 @@ protocol DisplayableMove {
  "contest_combos":{...}(2 hidden elements),
  "contest_effect":{...}(1 hidden elements),
  "contest_type":{...}(2 hidden elements),
- "damage_class":{...}(2 hidden elements),               √
+ "damage_class":{...}(2 hidden elements),
  "effect_chance":30,
  "effect_changes":[...](0 hidden elements),
  "effect_entries":[...](1 hidden elements),
@@ -31,7 +30,7 @@ protocol DisplayableMove {
  "learned_by_pokemon":[...](161 hidden elements),
  "machines":[...](0 hidden elements),
  "meta":{...}(12 hidden elements),
- "name":"bite",
+ "name":"bite",                                         √
  "names":[...](10 hidden elements),
  "past_values":[...](1 hidden elements),
  "power":60,                                            √

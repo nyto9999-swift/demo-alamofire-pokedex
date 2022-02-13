@@ -12,6 +12,7 @@ class PokemonViewController: UIViewController {
     
     var url: String? //passed data
     var data: DisplayablePokemon?
+    var moveData: [DisplayableMove] = []
     
     lazy var scrollView: UIScrollView = {
         let view = UIScrollView()
@@ -140,7 +141,12 @@ class PokemonViewController: UIViewController {
                 
                 
                 self.descriptionLabel.text = pokeDescriptions.text.description.replacingOccurrences(of: "\n", with: " ")
+                
             }
+        
+        
+
+        
         
         let detailsUrl = url.replacingOccurrences(of: "-species", with: "", options: NSString.CompareOptions.literal, range: nil)
         
