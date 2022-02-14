@@ -47,7 +47,6 @@ class PokemonViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
     
     lazy var abilityCollectionView: AbilityCollectionView = {
         
@@ -56,14 +55,12 @@ class PokemonViewController: UIViewController {
         layout.itemSize = CGSize(width: 100, height: 50)
         layout.minimumLineSpacing = 5
         layout.minimumInteritemSpacing = 1
-        
-        
+                
         let view = AbilityCollectionView(frame: .zero, collectionViewLayout: layout)
         view.isScrollEnabled = true
         view.heightAnchor.constraint(equalToConstant: 50).isActive = true
         view.translatesAutoresizingMaskIntoConstraints = false
         view.sizeToFit()
-        
         return view
     }()
     
@@ -113,9 +110,6 @@ class PokemonViewController: UIViewController {
             // this is important for scrolling
             scrollViewContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
-        
-        
-
     }
     
     @objc func pressedMove(){
@@ -124,8 +118,7 @@ class PokemonViewController: UIViewController {
         self.navigationController?.pushViewController(destinationVC, animated: true)
     }
     
-    
-        
+    //MARK: API call
     func fetchPokemonInfo(with url: String?){
         guard let url = url else { return }
         
@@ -134,31 +127,22 @@ class PokemonViewController: UIViewController {
         AF.request(url)
             .validate()
             .responseDecodable(of: PokemonDescriptions.self) { [weak self] (response) in
-                
                 guard let pokeDescriptions = response.value,
                       let self = self
                 else { return }
                 
-                
                 self.descriptionLabel.text = pokeDescriptions.text.description.replacingOccurrences(of: "\n", with: " ")
-                
             }
-        
-        
 
-        
-        
         let detailsUrl = url.replacingOccurrences(of: "-species", with: "", options: NSString.CompareOptions.literal, range: nil)
         
-        print("PokemonViewController Before url fetched by AF : \(detailsUrl)")
+//        print("PokemonViewController Before url fetched by AF : \(detailsUrl)")
     
-        
         /// Fetch Pokemon details from PokeAPi
         /// - Parameter url: "https://pokeapi.co/api/v2/pokemon/{id}"
         AF.request(detailsUrl)
             .validate()
             .responseDecodable(of: PokemonDetails.self) { [weak self] (response) in
-                
                 guard let pokeDetails = response.value,
                       let self = self
                 else { return }
@@ -181,7 +165,6 @@ class PokemonViewController: UIViewController {
 extension PokemonViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         return data?.abilitiesButton.count ?? 0
     }
     
@@ -189,9 +172,8 @@ extension PokemonViewController: UICollectionViewDelegate, UICollectionViewDataS
         let cell = abilityCollectionView.dequeueReusableCell(withReuseIdentifier: AbilityCollectionViewCell.identifier, for: indexPath) as! AbilityCollectionViewCell
         
         cell.data = self.data?.abilitiesButton[indexPath.row].ability.name
-        print(self.data?.abilitiesButton[indexPath.row].ability.name)
+//        print(self.data?.abilitiesButton[indexPath.row].ability.name)
         cell.configure()
-        
         return cell
     }
     

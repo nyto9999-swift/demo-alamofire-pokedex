@@ -46,3 +46,26 @@ extension PokemonDescriptions: DisplayablePokemonDescription {
 protocol DisplayablePokemonDescription {
     var text: String { get }
 }
+
+/*
+ https://pokeapi.co/api/v2/pokemon-species/1/
+ {
+     "base_happiness":70,
+     "capture_rate":45,
+     "color":{...}(2 hidden elements),
+     "egg_groups":[...](2 hidden elements),
+     "evolution_chain":{...}(1 hidden elements),
+     "evolves_from_species":null,
+     "flavor_text_entries":[
+         {
+         "flavor_text":"A strange seed was planted on its back at   √ birth.The plant sprouts and grows with this POKéMON.",
+         "language":{
+             "name":"en",                                           √
+             "url":"https://pokeapi.co/api/v2/language/9/",
+         },
+     "version":{...}(2 hidden elements)
+         },
+         {...}(3 hidden elements),
+     ],
+ }
+ */

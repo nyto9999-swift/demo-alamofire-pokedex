@@ -11,9 +11,9 @@ import Kingfisher
 
 class PokemonsViewController: UIViewController {
     
-    var generation: Displayable? //passed data
-    var items: [Displayable] = []
-    var filterItems: [Displayable] = []
+    var generation: Displayable?  //passed data
+    var items: [Displayable] = [] //fetched pokemon names and urls
+    var filterItems: [Displayable] = [] //searched pokemon name and urls
     var isSearch: Bool = false
     
     lazy var tableView = UITableView()
@@ -30,7 +30,7 @@ class PokemonsViewController: UIViewController {
         super.viewDidLoad()
         setViews()
         setupConstraints()
-        fetchPokeNameAndUrl(for: generation!.subtitleLabelText) //url
+        fetchPokeNameAndUrl(for: generation!.subtitleLabelText)//url
     }
     
     func setViews(){
@@ -53,14 +53,11 @@ class PokemonsViewController: UIViewController {
 // MARK: AF call
 extension PokemonsViewController {
     
-    
     /// Fetch Pokemon name and urlString from PokeAPi
     /// - Parameter url: https://pokeapi.co/api/v2/generation/{id}
-    
     func fetchPokeNameAndUrl(for url: String) {
-                
+        
       AF.request(url).validate().responseDecodable(of: Pokemons.self) { [weak self] (response) in
-          
         guard let pokemons = response.value,
               let self = self
         else { return }
@@ -80,7 +77,7 @@ extension PokemonsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PokemonCell.identifier) as! PokemonCell
-        
+
         let item = isSearch ? filterItems[indexPath.row] : items[indexPath.row]
         
         let urlString = item.subtitleLabelText.replacingOccurrences(of: "-species", with: "", options: NSString.CompareOptions.literal, range: nil)
@@ -89,8 +86,8 @@ extension PokemonsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let destinationVC = PokemonViewController()
         
+        let destinationVC = PokemonViewController()
         destinationVC.url = isSearch ? filterItems[indexPath.row].subtitleLabelText : items[indexPath.row].subtitleLabelText
         self.navigationController?.pushViewController(destinationVC, animated: true)
     }
@@ -100,6 +97,7 @@ extension PokemonsViewController: UITableViewDelegate, UITableViewDataSource {
 extension PokemonsViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
         if searchBar.text == "" || searchBar.text == nil {
             isSearch = false
             self.tableView.reloadData()
@@ -108,8 +106,9 @@ extension PokemonsViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text else { return }
-        searchBar.resignFirstResponder()
         
+        searchBar.resignFirstResponder()
+
         filterItems = items.filter({
             $0.titleLabelText.contains(text)
         })
@@ -119,6 +118,7 @@ extension PokemonsViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
         searchBar.text = ""
         self.tableView.reloadData()
         isSearch = false

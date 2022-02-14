@@ -8,7 +8,8 @@ import UIKit
 import Kingfisher
 
 final class ProfileStackView: UIStackView {
-    var data: DisplayablePokemon?
+    
+    var data: DisplayablePokemon? //passed data
     
     private lazy var textLabel1: UILabel = textLabel()
     private lazy var textLabel2: UILabel = textLabel()
@@ -38,6 +39,19 @@ final class ProfileStackView: UIStackView {
         setupViews()
         setupConstraints()
     }
+
+    private func setupViews(){
+        self.addArrangedSubviews(imageView, textStackView)
+        textStackView.addArrangedSubviews(textLabel1, textLabel2, typeStackView)
+        typeStackView.addArrangedSubviews(typeButton1,typeButton2)
+    }
+    
+    private func setupConstraints(){
+        NSLayoutConstraint.activate([
+            imageView.heightAnchor.constraint(equalToConstant: 100),
+            imageView.widthAnchor.constraint(equalToConstant: 100)
+        ])
+    }
     
     public convenience init() {
         self.init(frame: .zero)
@@ -47,27 +61,12 @@ final class ProfileStackView: UIStackView {
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private func setupViews(){
-        self.addArrangedSubviews(imageView, textStackView)
-        textStackView.addArrangedSubviews(textLabel1, textLabel2, typeStackView)
-        typeStackView.addArrangedSubviews(typeButton1,typeButton2)
-    }
-    
-    private func setupConstraints(){
-        
-        NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalToConstant: 100),
-            imageView.widthAnchor.constraint(equalToConstant: 100)
-        ])
-    }
 }
 
 extension ProfileStackView {
-    
     public func configure(){
-        
         guard let data = data else { return }
+        
         let text1 = data.nameLabelText
         let height = data.hwLabelText.height
         let weight = data.hwLabelText.weight
@@ -79,9 +78,6 @@ extension ProfileStackView {
         
         typeButton1.setTitle(type1, for: .normal)
         typeButton1.configuration?.baseBackgroundColor = getTypeColor(for: type1)
-
-        print(type1)
-        
         
         if type2 == "" {
             typeButton2.isHidden = true

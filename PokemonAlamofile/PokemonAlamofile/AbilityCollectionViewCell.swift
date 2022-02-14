@@ -45,17 +45,10 @@ class AbilityCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     public func configure() {
-
         guard let data = data else { return }
-        
+
         textLabel.text = data
-        
     }
     
     override func prepareForReuse() {
@@ -63,5 +56,8 @@ class AbilityCollectionViewCell: UICollectionViewCell {
         textLabel.text = ""
         
     }
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
