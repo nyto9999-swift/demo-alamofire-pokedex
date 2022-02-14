@@ -126,6 +126,27 @@
 			path = PokemonAlamofile;
 			sourceTree = "<group>";
 		};
+		8D976C1027B9FFF800090A77 /* PokemonVC */ = {
+			isa = PBXGroup;
+			children = (
+				8DE3FEF527AFCAA800099815 /* PokemonViewController.swift */,
+				8DE3FF0F27B2188D00099815 /* ProfileStackView.swift */,
+				8DE3FF1127B2189700099815 /* StatStackView.swift */,
+				8DE3FF1527B2191D00099815 /* AbilityCollectionView.swift */,
+				8D93C36327B4AF5900E2D40F /* AbilityCollectionViewCell.swift */,
+			);
+			name = PokemonVC;
+			sourceTree = "<group>";
+		};
+		8D976C1127BA003100090A77 /* PokemonsVC */ = {
+			isa = PBXGroup;
+			children = (
+				8DE3FEF327AFCA9900099815 /* PokemonsViewController.swift */,
+				8D79236427B62CFD0071DE14 /* PokemonCell.swift */,
+			);
+			name = PokemonsVC;
+			sourceTree = "<group>";
+		};
 		8DA1E85027B7C39F008B7726 /* MovesVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,8 +185,8 @@
 			isa = PBXGroup;
 			children = (
 				8DE5CC0E27B67EBD0092B025 /* GenerationVC-root */,
-				8DE5CC0F27B67ED70092B025 /* PokemonsVC */,
-				8DE5CC1127B67F230092B025 /* PokemonVC */,
+				8D976C1127BA003100090A77 /* PokemonsVC */,
+				8D976C1027B9FFF800090A77 /* PokemonVC */,
 				8DA1E85027B7C39F008B7726 /* MovesVC */,
 			);
 			name = View;
@@ -187,27 +208,6 @@
 				8D19D37627B78B5D00F44FC3 /* GenerationCell.swift */,
 			);
 			path = "GenerationVC-root";
-			sourceTree = "<group>";
-		};
-		8DE5CC0F27B67ED70092B025 /* PokemonsVC */ = {
-			isa = PBXGroup;
-			children = (
-				8DE3FEF327AFCA9900099815 /* PokemonsViewController.swift */,
-				8D79236427B62CFD0071DE14 /* PokemonCell.swift */,
-			);
-			name = PokemonsVC;
-			sourceTree = "<group>";
-		};
-		8DE5CC1127B67F230092B025 /* PokemonVC */ = {
-			isa = PBXGroup;
-			children = (
-				8DE3FEF527AFCAA800099815 /* PokemonViewController.swift */,
-				8DE3FF0F27B2188D00099815 /* ProfileStackView.swift */,
-				8DE3FF1127B2189700099815 /* StatStackView.swift */,
-				8DE3FF1527B2191D00099815 /* AbilityCollectionView.swift */,
-				8D93C36327B4AF5900E2D40F /* AbilityCollectionViewCell.swift */,
-			);
-			name = PokemonVC;
 			sourceTree = "<group>";
 		};
 		FC5961898BFDA5D0286C5458 /* Frameworks */ = {
