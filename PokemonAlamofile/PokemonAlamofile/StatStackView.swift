@@ -4,10 +4,10 @@
 //
 //  Created by 宇宣 Chen on 2022/2/8.
 //
-
 import UIKit
 
 final class StatStackView: UIStackView {
+    
     var data: DisplayablePokemon?
     
     private lazy var statRowStackView1: UIStackView = statRow()
@@ -34,20 +34,10 @@ final class StatStackView: UIStackView {
     private lazy var textLabel6: UILabel = textLabel()
     private lazy var barView6: UIProgressView = stateBar()
 
-    
     private override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
         setupConstraints()
-    }
-    
-    public convenience init() {
-        self.init(frame: .zero)
-        configure()
-    }
-    
-    required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     private func setupViews(){
@@ -62,14 +52,20 @@ final class StatStackView: UIStackView {
     
     private func setupConstraints(){
     }
+    
+    public convenience init() {
+        self.init(frame: .zero)
+        configure()
+    }
+    
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 extension StatStackView {
     public func configure(){
-        
-        guard let data = data else {
-            return
-        }
+        guard let data = data else { return }
         
         textLabel1.text = "HP: \(data.statsArray[0].value)"
         textLabel2.text = "Attack: \(data.statsArray[1].value)"
@@ -77,6 +73,7 @@ extension StatStackView {
         textLabel4.text = "Special Attack: \(data.statsArray[3].value)"
         textLabel5.text = "Special Defense: \(data.statsArray[4].value)"
         textLabel6.text = "Speed: \(data.statsArray[5].value)"
+        
         barView1.progressTintColor = .systemMint
         barView2.progressTintColor = .systemOrange
         barView3.progressTintColor = .systemYellow
@@ -85,7 +82,6 @@ extension StatStackView {
         barView6.progressTintColor = .systemPink
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            
             self.barView1.setProgress(Float(1.0 - (160.0 - Double(data.statsArray[0].value)) / 160.0), animated: false)
             self.barView2.setProgress(Float(1.0 - (160.0 - Double(data.statsArray[1].value)) / 160.0), animated: false)
             self.barView3.setProgress(Float(1.0 - (160.0 - Double(data.statsArray[2].value)) / 160.0), animated: false)

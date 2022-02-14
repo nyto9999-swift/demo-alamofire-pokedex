@@ -15,3 +15,26 @@ protocol DisplayablePokemon {
     var statsArray: Array<stat> { get }
 }
 
+/*
+ PokemonDetails Model
+ {
+     "abilities":[...],     ✓
+     "base_experience":64,  ✓
+     "forms":[...],
+     "game_indices":[...],
+     "height":7,            ✓
+     "held_items":[...],
+     "id":1,
+     "is_default":true,
+     "location_area_encounters",
+     "moves":[...],
+     "name":"bulbasaur",
+     "order":1,
+     "past_types":[...],
+     "species":{...},
+     "sprites":{...},       ✓ poke image url
+     "stats":[...],         ✓
+     "types":[...],         ✓
+     "weight":69,           ✓
+ }
+ */

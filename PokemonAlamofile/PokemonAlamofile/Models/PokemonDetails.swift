@@ -88,6 +88,35 @@ extension PokemonDetails: DisplayablePokemon {
     
 }
 
+struct ability: Decodable {
+    let ability: abilityName
+    
+    enum CodingKeys: String, CodingKey {
+        case ability
+    }
+}
+
+struct abilityName: Decodable {
+    let name : String
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+    }
+}
+
+
+struct move: Decodable {
+    let move: moveName
+    
+    enum CodingKeys: String, CodingKey {
+        case move
+    }
+}
+
+struct moveName: Decodable {
+    let name: String
+    let url: String
+}
 
 struct stat: Decodable {
     let value: Int
@@ -105,34 +134,6 @@ struct image: Decodable {
     }
 }
 
-struct move: Decodable {
-    let move: moveName
-    
-    enum CodingKeys: String, CodingKey {
-        case move
-    }
-}
-
-struct moveName: Decodable {
-    let name: String
-    let url: String
-}
-
-struct ability: Decodable {
-    let ability: abilityName
-    
-    enum CodingKeys: String, CodingKey {
-        case ability
-    }
-}
-
-struct abilityName: Decodable {
-    let name : String
-    
-    enum CodingKeys: String, CodingKey {
-        case name
-    }
-}
 
 struct type: Decodable {
     let slot : Int

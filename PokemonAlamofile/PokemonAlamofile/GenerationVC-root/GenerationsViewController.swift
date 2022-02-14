@@ -11,11 +11,9 @@ import Kingfisher
 
 class GenerationsViewController: UIViewController {
 
-    var items: [Displayable] = []
-    var chosenItem: Displayable?
+    var items: [Displayable] = [] //store fetched data from PokeAPi
+    var passingItem: Displayable?
     let tableView = UITableView()
-    var imageSet = [UIImage]()
-
 
     override func viewDidLoad() {
       super.viewDidLoad()
@@ -32,7 +30,6 @@ class GenerationsViewController: UIViewController {
         
         tableView.register(GenerationCell.self, forCellReuseIdentifier: GenerationCell.identifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        
     }
     
     func setupConstraints(){
@@ -66,16 +63,15 @@ extension GenerationsViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: GenerationCell.identifier, for: indexPath) as! GenerationCell
-        
         cell.configure(for: indexPath.row)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        chosenItem = items[indexPath.row]
         
+        passingItem = items[indexPath.row]
         let destinationVC = PokemonsViewController()
-        destinationVC.generation = chosenItem
+        destinationVC.generation = passingItem
         self.navigationController?.pushViewController(destinationVC, animated: true)
     }
 }

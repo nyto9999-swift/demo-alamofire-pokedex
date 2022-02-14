@@ -8,10 +8,10 @@
 import UIKit
 
 struct MoveDetails: Decodable {
-    let accuracy: Int
-    let power: Int
+    let accuracy: Int?
+    let power: Int?
     let type: moveType
-    let pp: Int
+    let pp: Int?
     let descriptions: [moveDescription]
     
     enum CodingKeys: String, CodingKey {
@@ -44,7 +44,7 @@ extension MoveDetails: DisplayableMove {
     }
     
     var ppLabel: String {
-        String(pp)
+        (pp != nil) ? String(pp!) : "Unknown"
     }
     
     var moveDescription: String {
@@ -56,14 +56,12 @@ extension MoveDetails: DisplayableMove {
     }
     
     var accuracyLabel: String {
-        String(accuracy)
+        (accuracy != nil) ? String(accuracy!) : "Unknown"
     }
     
     var powerLabel: String {
-        String(power)
+        (power != nil) ? String(power!) : "Unknown"
     }
-
-    
 }
 
 /*
