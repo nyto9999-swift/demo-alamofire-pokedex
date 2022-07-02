@@ -1,6 +1,4 @@
 # PokemonAlamofire
-> ###介紹
-此app是一個抓取poke api網站的json做成的寶可夢百科，開發初期閱讀 protocol oriented programming、alamofire、kingfisher相關文檔 以及了解autolayout相關知識。開發遇到了兩個難題(對我來說)，第一個難題是快取圖片，好在網路上有很多資源，此問題已順利解決。第二個難題是客製化vc，由於此app的需求是兼容 landscape 和 portrait，但礙於技術上的不足無法實現。 在下方draw.io的連結可以找到此app的草圖和實際app圖片。
 
 > [Poke API](https://pokeapi.co)
 
